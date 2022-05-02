@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ICS3U">
         <activity
+            android:name=".Pop_up_input"
+            android:exported="false" />
+        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
