@@ -1,5 +1,6 @@
 package com.example.ics3u;
 
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
@@ -10,9 +11,11 @@ public class CalendarViewHolder extends RecyclerView.ViewHolder implements View.
     public final TextView dayOfMonth;
     public final CalendarAdapter.OnItemListener onItemListener;
 
-    public CalendarViewHolder(@NonNull View itemView) {
+    public CalendarViewHolder(@NonNull View itemView, CalendarAdapter.OnItemListener onItemListener) {
         super(itemView);
-        dayOfMonth = itemView.findViewById(R.id.cellDayText)
+        dayOfMonth = itemView.findViewById(R.id.cellDayText);
+        this.onItemListener = onItemListener;
+        itemView.setOnClickListener(this);
     }
 
     @Override
