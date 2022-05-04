@@ -6,9 +6,10 @@
         <entry key="..\:/Users/dukev/Documents/GitHub/Kwick-Meal-Planner/app/src/main/res/drawable/ic_launcher_background.xml" value="0.1555" />
         <entry key="..\:/Users/dukev/Documents/GitHub/Kwick-Meal-Planner/app/src/main/res/layout/activity_main.xml" value="0.335" />
         <entry key="..\:/Users/dukev/Documents/GitHub/Kwick-Meal-Planner/app/src/main/res/layout/activity_pop_up_input.xml" value="0.24166666666666667" />
+        <entry key="app/src/main/res/layout/activity_calendar_input_meal.xml" value="0.33" />
         <entry key="app/src/main/res/layout/activity_calendar_page.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.10054347826086957" />
-        <entry key="app/src/main/res/layout/activity_meal_input_page.xml" value="0.10054347826086957" />
+        <entry key="app/src/main/res/layout/activity_meal_input_page.xml" value="0.22" />
         <entry key="app/src/main/res/layout/activity_pop_up_input.xml" value="0.1" />
       </map>
     </option>
