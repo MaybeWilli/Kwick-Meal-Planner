@@ -8,6 +8,15 @@
     android:orientation="vertical">
 
     <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/dailyMeals"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        />
+    <TextView
         android:id="@+id/dateTV"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

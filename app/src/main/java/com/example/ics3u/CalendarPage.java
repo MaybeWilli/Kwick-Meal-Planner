@@ -27,6 +27,7 @@ public class CalendarPage extends AppCompatActivity implements CalendarAdapter.O
     private TextView monthYearText;
     private RecyclerView calendarRecyclerView;
     public static LocalDate selectedDate;
+    public static String currentDate;
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
@@ -106,9 +107,10 @@ public class CalendarPage extends AppCompatActivity implements CalendarAdapter.O
     public void onItemClick(int position, String dayText) {
         /*if (!dayText.equals(""))
         {
-            String message = "Selected Date" + dayText + " " + monthYearFromDate(selectedDate);
+            String message = "Selected Date " + dayText + " " + monthYearFromDate(selectedDate);
             Toast.makeText(this, message, Toast.LENGTH_LONG).show();
-        }*/
+        }//*/
+        currentDate = dayText + " " + monthYearFromDate(selectedDate);
         Intent intent = new Intent(this, calendar_input_meal.class);
         startActivity(intent);
     }

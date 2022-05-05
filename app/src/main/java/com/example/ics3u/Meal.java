@@ -6,6 +6,11 @@ public class Meal {
     //ingredients will be implemented later (probably)
     public String[] ingredients; //ingredient list, e.x: [lettuce, chicken, fruit]
 
+    public Meal() //dunno why you'd ever use this...
+    {
+        name = "Empty Meal";
+    }
+
     public Meal(String name)
     {
         this.name = name;
