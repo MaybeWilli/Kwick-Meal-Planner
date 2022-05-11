@@ -11,6 +11,7 @@ import android.widget.EditText;
 import android.widget.Spinner;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class MealInputPage extends AppCompatActivity {
 
@@ -24,6 +25,8 @@ public class MealInputPage extends AppCompatActivity {
         setContentView(R.layout.activity_meal_input_page);
         mealET = findViewById(R.id.mealET);
         mealInputSpinner = findViewById(R.id.mealInputSpinner);
+
+
         /*for (int i = 0; i < MealManager.meals.length; i++)
         {
             arrayList.add(MealManager.meals[i].name);

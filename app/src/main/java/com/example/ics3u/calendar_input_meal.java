@@ -3,6 +3,7 @@ package com.example.ics3u;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
@@ -23,7 +24,8 @@ public class calendar_input_meal extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_calendar_input_meal);
         initWidgets();
-        dateTV.setText("Date: "+ CalendarPage.selectedDate);
+        dateTV.setText("Date: "+ CalendarPage.currentDate);
+        Log.e("hmm", "Hello1");
 
         //set the spinner
         mealInputSpinner = findViewById(R.id.mealInputSpinner);
@@ -31,6 +33,8 @@ public class calendar_input_meal extends AppCompatActivity {
         {
             arrayList.add(MealManager.meals.get(i).name);
         }
+
+        Log.e("hmm", "Hello2");
         //*/
 
         //arrayList.add("Hello");
@@ -38,22 +42,34 @@ public class calendar_input_meal extends AppCompatActivity {
         arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         mealInputSpinner.setAdapter(arrayAdapter);
 
+        Log.e("hmm", "Hello3");
         //set the meals
         String mealText = "";
         Boolean hasMeals = Boolean.FALSE;
-        for (int i = 0; i < MealManager.plannedMeals.size(); i++)
+        Log.e("hmm", "Hello3.1"+MealManager.plannedMeals.size());
+        if (MealManager.plannedMeals.size() != 0)
         {
-            if (MealManager.plannedMeals.get(i).date.equals(CalendarPage.currentDate))
+            for (int i = 0; i < MealManager.plannedMeals.size(); i++)
             {
-                mealText = mealText + "\n-"+MealManager.plannedMeals.get(i).meal.name;
-                hasMeals = Boolean.TRUE;
+                Log.e("hmm", "Whyyyy");
+                Log.e("hmm", MealManager.plannedMeals.get(i).date);
+                Log.e("hmm", "oh");
+                if (MealManager.plannedMeals.get(i).date.equals(CalendarPage.currentDate))
+                {
+                    mealText = mealText + "\n-"+MealManager.plannedMeals.get(i).meal.name;
+                    hasMeals = Boolean.TRUE;
+                }
+                Log.e("hmm", "Hmm");
             }
         }
+        Log.e("hmm", "hello3.4");
         if (hasMeals)
         {
             mealText = "Here are today's meals:" + mealText;
         }
+        Log.e("hmm", "Hello4");
         dailyMeal.setText(mealText);
+        Log.e("hmm", "Hello5");
     }
 
     private void initWidgets()
@@ -74,7 +90,9 @@ public class calendar_input_meal extends AppCompatActivity {
                 selectedMeal = MealManager.meals.get(i);
             }
         }
+        Log.e("hmm", "Well, not here!");
         MealManager.addPlannedMeal(selectedMeal, CalendarPage.currentDate);
+        Log.e("hmm", "wacky");
         finish();
     }
 }
