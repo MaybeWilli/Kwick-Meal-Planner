@@ -6,6 +6,7 @@ import android.util.Log;
 import androidx.annotation.RequiresApi;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class MealManager {
@@ -64,8 +65,9 @@ public class MealManager {
         Log.e("hmm", "uh "+savedMeals.size());
         for (int i = 0; i < savedMeals.size(); i++)
         {
+            //https://stackoverflow.com/questions/23172397/how-to-split-a-string-to-an-arraylist
             mealId++;
-            MealManager.meals.add(new Meal(savedMeals.get(i).name, new ArrayList<String>()));
+            MealManager.meals.add(new Meal(savedMeals.get(i).name, new ArrayList<String>(Arrays.asList(savedMeals.get(i).ingredients.split(",")))));
         }
 
         MealManager.plannedMeals.clear();
