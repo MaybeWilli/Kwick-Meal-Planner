@@ -8,13 +8,11 @@ import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.room.Room;
-import java.lang.*;
-
-import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
     private Button button;
     private Button button2;
+    private Button button3;
     public static SavedMealDatabase savedMealDatabase;// = Room.databaseBuilder(getApplicationContext(), SavedMealDatabase.class, "savedMealDatabase").build();
     public static MealDao mealDao;
     public static SavedMealDatabase savedPlannedMealDatabase;// = Room.databaseBuilder(getApplicationContext(), SavedMealDatabase.class, "savedMealDatabase").build();
@@ -61,6 +59,14 @@ public class MainActivity extends AppCompatActivity {
                 openMealInputPage();
             }
         });
+
+        button3 = (Button) findViewById(R.id.displayMealPageButton);
+        button3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openDisplayMealPage();
+            }
+        });
     }
 
     public void openActivity2() {
@@ -71,6 +77,12 @@ public class MainActivity extends AppCompatActivity {
     public void openMealInputPage()
     {
         Intent intent = new Intent(this, MealInputPage.class);
+        startActivity(intent);
+    }
+
+    public void openDisplayMealPage()
+    {
+        Intent intent = new Intent(this, DisplayMealPage.class);
         startActivity(intent);
     }
 

@@ -16,4 +16,7 @@ public class SavedMeal {
     @ColumnInfo(name = "meal_date")
     public String date;
 
+    @ColumnInfo(name = "meal_ingredients")
+    public String ingredients;
+
 }

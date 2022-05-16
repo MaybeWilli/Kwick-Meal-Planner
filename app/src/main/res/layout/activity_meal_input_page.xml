@@ -19,7 +19,7 @@
         android:textColor="@color/white"
         android:textStyle="bold"
         android:textSize="30dp"/>
-
+    <!--
     <TableRow
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -38,6 +38,7 @@
             android:outlineSpotShadowColor="@color/white"
             android:textSize="30dp" />
     </TableRow>
+    -->
     <TableRow
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -51,6 +52,26 @@
             android:fontFamily="sans-serif-black"/>
         <EditText
             android:id="@+id/mealET"
+            android:hint=""
+            android:inputType="textAutoCorrect"
+            android:textColor="@color/white"
+            android:textSize="30dp"
+            android:padding="20dp"/>
+    </TableRow>
+
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center_horizontal"
+        android:orientation="horizontal">
+        <TextView
+            android:gravity="end"
+            android:text="Ingredient:"
+            android:textColor="@color/white"
+            android:textSize="30dp"
+            android:fontFamily="sans-serif-black"/>
+        <EditText
+            android:id="@+id/ingredientET"
             android:hint=""
             android:inputType="textAutoCorrect"
             android:textColor="@color/white"
@@ -73,11 +94,22 @@
             android:id="@+id/button_save_user_data"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Save User Data"
+            android:text="Save Meal"
             android:textSize="20dp"
             android:textAllCaps="false"
             android:gravity="center_horizontal"
             android:layout_marginBottom="20dp"
             android:onClick="addMealFromET"/>
     </TableRow>
+
+    <Button
+        android:id="@+id/button_save_ingredient"
+        android:layout_width="278dp"
+        android:layout_height="50dp"
+        android:layout_marginBottom="20dp"
+        android:gravity="center_horizontal"
+        android:onClick="addIngredientFromET"
+        android:text="Save Ingredient"
+        android:textAllCaps="false"
+        android:textSize="20dp" />
 </TableLayout>

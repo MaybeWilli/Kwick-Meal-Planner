@@ -1,10 +1,12 @@
 package com.example.ics3u;
 
+import java.util.ArrayList;
+
 public class Meal {
     //variables
     public String name; //name of the meal, e.x: Chicken Salad, Beef Stew, etc
     //ingredients will be implemented later (probably)
-    public String[] ingredients; //ingredient list, e.x: [lettuce, chicken, fruit]
+    public ArrayList<String> ingredients; //ingredient list, e.x: [lettuce, chicken, fruit]
 
     public Meal() //dunno why you'd ever use this...
     {
@@ -16,7 +18,7 @@ public class Meal {
         this.name = name;
     }
 
-    public Meal(String name, String[] ingredients) {
+    public Meal(String name, ArrayList<String> ingredients) {
         this.name = name;
         this.ingredients = ingredients;
     }

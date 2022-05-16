@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".calendar_input_meal"
+    android:orientation="vertical">
+
+    <TableRow
+        android:layout_width="350dp"
+        android:layout_height="50dp"
+        android:gravity="left"
+        android:orientation="horizontal"
+        android:layout_marginTop="50dp"
+        android:layout_marginLeft="20dp">
+
+        <EditText
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:id="@+id/searchMealET"
+            />
+        <Button
+            android:id="@+id/searchMealButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Search"
+            android:textSize="18dp"/>
+            <!--android:onClick="searchMeal"-->
+
+    </TableRow>
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/mealsTV"
+        android:layout_gravity="left"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="150dp"
+        android:textColor="@color/black"
+        android:text="Hello"
+        android:textSize="20sp"
+        />
+
+
+
+</LinearLayout>

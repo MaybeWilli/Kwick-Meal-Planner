@@ -95,4 +95,5 @@ public class calendar_input_meal extends AppCompatActivity {
         Log.e("hmm", "wacky");
         finish();
     }
+
 }

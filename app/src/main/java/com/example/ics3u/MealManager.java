@@ -1,12 +1,10 @@
 package com.example.ics3u;
 
-import android.provider.ContactsContract;
+import android.os.Build;
 import android.util.Log;
 
-import androidx.constraintlayout.motion.widget.Debug;
+import androidx.annotation.RequiresApi;
 
-import java.lang.reflect.Array;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,9 +16,21 @@ public class MealManager {
 
     public static void addMeal(String name) //look, I'll add some more overloads later, ok?
     {
-        Meal newMeal = new Meal(name);
+        Meal newMeal = new Meal(name, new ArrayList<String>());
         meals.add(newMeal);
-        InsertSavedMeal insertSavedMeal = new InsertSavedMeal(name);
+        InsertSavedMeal insertSavedMeal = new InsertSavedMeal(name, "");
+        insertSavedMeal.thread.start();
+        PrintElements();
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    public static void addMeal(String name, ArrayList<String> ingredients) //look, I'll add some more overloads later, ok?
+    {
+        Meal newMeal = new Meal(name, ingredients);
+        meals.add(newMeal);
+        String ingredientStr = String.join(",", ingredients);
+        Log.e("hmm", ingredientStr);
+        InsertSavedMeal insertSavedMeal = new InsertSavedMeal(name, ingredientStr);
         insertSavedMeal.thread.start();
         PrintElements();
     }
@@ -44,13 +54,18 @@ public class MealManager {
 
     public static void InstantiateArrays()
     {
+        Log.e("hmm", "hmm");
         MealManager.meals.clear();
+        Log.e("hmm", "bruh");
         List<SavedMeal> savedMeals = MainActivity.mealDao.getAll();
+        Log.e("hmm", "check");
         mealId = 0;
+        Log.e("hmm", "well");
+        Log.e("hmm", "uh "+savedMeals.size());
         for (int i = 0; i < savedMeals.size(); i++)
         {
             mealId++;
-            MealManager.meals.add(new Meal(savedMeals.get(i).name));
+            MealManager.meals.add(new Meal(savedMeals.get(i).name, new ArrayList<String>()));
         }
 
         MealManager.plannedMeals.clear();
@@ -67,16 +82,19 @@ public class MealManager {
     static class InsertSavedMeal implements Runnable {
         Thread thread = new Thread(this, "insert_data");
         String name;
+        String ingredients;
 
-        public InsertSavedMeal(String name)
+        public InsertSavedMeal(String name, String ingredients)
         {
             this.name = name;
+            this.ingredients = ingredients;
         }
         @Override
         public void run() {
             SavedMeal meal = new SavedMeal();
             meal.name = this.name;
             meal.uid = mealId;
+            meal.ingredients = this.ingredients;
             mealId++;
             MainActivity.savedMealDatabase.mealDao().insertOneMeal(meal);
         }
