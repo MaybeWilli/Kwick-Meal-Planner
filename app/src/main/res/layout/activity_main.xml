@@ -35,6 +35,6 @@
 		android:layout_height="wrap_content"
 		android:layout_below="@+id/inputMealPageButton"
 		android:layout_centerHorizontal="true"
-		android:text="Open Meal Input" />
+		android:text="Open Meal Display" />
 
 </RelativeLayout>

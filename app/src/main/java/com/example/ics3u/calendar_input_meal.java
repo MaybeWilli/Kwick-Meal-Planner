@@ -1,7 +1,5 @@
 package com.example.ics3u;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -9,6 +7,8 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.ArrayList;
 
@@ -18,6 +18,7 @@ public class calendar_input_meal extends AppCompatActivity {
     private Spinner mealInputSpinner;
     private ArrayList<String> arrayList = new ArrayList<>();
     private TextView dailyMeal;
+    private EditText servingsET;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +46,7 @@ public class calendar_input_meal extends AppCompatActivity {
         Log.e("hmm", "Hello3");
         //set the meals
         String mealText = "";
+        float totalCalories = 0;
         Boolean hasMeals = Boolean.FALSE;
         Log.e("hmm", "Hello3.1"+MealManager.plannedMeals.size());
         if (MealManager.plannedMeals.size() != 0)
@@ -57,6 +59,7 @@ public class calendar_input_meal extends AppCompatActivity {
                 if (MealManager.plannedMeals.get(i).date.equals(CalendarPage.currentDate))
                 {
                     mealText = mealText + "\n-"+MealManager.plannedMeals.get(i).meal.name;
+                    totalCalories += MealManager.plannedMeals.get(i).meal.calories * MealManager.plannedMeals.get(i).servings;
                     hasMeals = Boolean.TRUE;
                 }
                 Log.e("hmm", "Hmm");
@@ -66,6 +69,7 @@ public class calendar_input_meal extends AppCompatActivity {
         if (hasMeals)
         {
             mealText = "Here are today's meals:" + mealText;
+            mealText += "\nToday's total calories: "+totalCalories;
         }
         Log.e("hmm", "Hello4");
         dailyMeal.setText(mealText);
@@ -77,6 +81,7 @@ public class calendar_input_meal extends AppCompatActivity {
         calenderET = findViewById(R.id.mealInputET);
         dateTV = findViewById(R.id.dateTV);
         dailyMeal = findViewById(R.id.dailyMeals);
+        servingsET = findViewById(R.id.servingsET);
     }
 
     public void calendarSaveMeal(View view)
@@ -91,7 +96,16 @@ public class calendar_input_meal extends AppCompatActivity {
             }
         }
         Log.e("hmm", "Well, not here!");
-        MealManager.addPlannedMeal(selectedMeal, CalendarPage.currentDate);
+        float servings;
+        if (!servingsET.getText().toString().equals(""))
+        {
+            servings = Float.parseFloat(servingsET.getText().toString());
+        }
+        else
+        {
+            servings = 0;
+        }
+        MealManager.addPlannedMeal(selectedMeal, CalendarPage.currentDate, servings);
         Log.e("hmm", "wacky");
         finish();
     }

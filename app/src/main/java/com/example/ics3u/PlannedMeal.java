@@ -1,14 +1,14 @@
 package com.example.ics3u;
 
-import java.time.LocalDate;
-
 public class PlannedMeal {
     public Meal meal;
     public String date;
+    public float servings;
 
-    public PlannedMeal(Meal meal, String date)
+    public PlannedMeal(Meal meal, String date, float servings)
     {
         this.meal = meal;
         this.date = date;
+        this.servings = servings;
     }
 }

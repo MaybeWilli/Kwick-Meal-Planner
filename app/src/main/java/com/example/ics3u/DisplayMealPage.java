@@ -29,18 +29,16 @@ public class DisplayMealPage extends AppCompatActivity {
     private String generateMealString()
     {
         String value = "";
-        Log.e("hmm", "Whys");
 
         for (int i = 0; i < MealManager.meals.size(); i++)
         {
-            Log.e("hmm", "For what reason?");
-            value += "\n" + MealManager.meals.get(i).name;
-            Log.e("hmm", "Why?"+MealManager.meals.get(i).ingredients.get(0));
+            value += MealManager.meals.get(i).name;
+            //Log.e("DisplayMeal", "Ingredient: "+MealManager.meals.get(i).ingredients.get(0));
             for (int j = 0; j < MealManager.meals.get(i).ingredients.size(); j++)
             {
-                Log.e("hmm", "What events lead to this?");
                 value += "\n    -" + MealManager.meals.get(i).ingredients.get(j);
             }
+            value += "\nCalories per serving: "+MealManager.meals.get(i).calories+"\n\n";
         }
 
         return value;

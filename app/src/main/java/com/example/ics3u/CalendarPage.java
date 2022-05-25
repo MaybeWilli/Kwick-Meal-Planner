@@ -5,16 +5,12 @@ import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
-import org.w3c.dom.Text;
 
 import java.time.LocalDate;
 import java.time.YearMonth;
@@ -37,6 +33,7 @@ public class CalendarPage extends AppCompatActivity implements CalendarAdapter.O
         setContentView(R.layout.activity_calendar_page);
         initWidgets();
         selectedDate = LocalDate.now();
+        setMonthView();
 
     }
 
