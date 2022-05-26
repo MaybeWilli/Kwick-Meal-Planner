@@ -1,7 +1,9 @@
 package com.example.ics3u;
 
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -17,6 +19,7 @@ public class MainActivity extends AppCompatActivity {
     public static MealDao mealDao;
     public static SavedMealDatabase savedPlannedMealDatabase;// = Room.databaseBuilder(getApplicationContext(), SavedMealDatabase.class, "savedMealDatabase").build();
     public static MealDao plannedMealDao;
+    public static MediaPlayer mediaPlayer;
     //public MealDao mealDao = savedMealDatabase.mealDao();
 
     @Override
@@ -33,6 +36,10 @@ public class MainActivity extends AppCompatActivity {
         plannedMealDao = savedPlannedMealDatabase.mealDao();
         FetchData fetchData = new FetchData();
         fetchData.thread.start();
+
+        mediaPlayer = MediaPlayer.create(this, R.raw.il_vento_doro);
+        mediaPlayer.setLooping(true);
+        mediaPlayer.start();
         //mealDao.insertOneMeal(new SavedMeal());
         //List<SavedMeal> savedMeals = mealDao.getAll();
         //SavedMeal[] savedMeals = mealDao.getAll();
