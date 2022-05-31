@@ -13,32 +13,12 @@
         android:layout_height="42dp"
         android:layout_gravity="end"
         android:background="@drawable/ic_launcher_background"
-        android:fontFamily="sans-serif-medium"
+        android:fontFamily="casual"
         android:gravity="center_horizontal"
         android:text=""
         android:textColor="@color/white"
         android:textStyle="bold"
         android:textSize="30dp"/>
-    <!--
-    <TableRow
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center_horizontal"
-        android:orientation="horizontal">
-        <TextView
-            android:gravity="end"
-            android:text="Date:"
-            android:textColor="@color/white"
-            android:textSize="30dp"
-            android:fontFamily="sans-serif-black"/>
-        <EditText
-            android:id="@+id/date"
-            android:hint=""
-            android:inputType="text"
-            android:outlineSpotShadowColor="@color/white"
-            android:textSize="30dp" />
-    </TableRow>
-    -->
     <TableRow
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -49,7 +29,7 @@
             android:text="Meal:"
             android:textColor="@color/white"
             android:textSize="30dp"
-            android:fontFamily="sans-serif-black"/>
+            android:fontFamily="casual"/>
         <EditText
             android:id="@+id/mealET"
             android:hint=""
@@ -69,7 +49,7 @@
             android:text="Ingredient:"
             android:textColor="@color/white"
             android:textSize="30dp"
-            android:fontFamily="sans-serif-black"/>
+            android:fontFamily="casual"/>
         <EditText
             android:id="@+id/ingredientET"
             android:hint=""
@@ -86,12 +66,12 @@
         android:orientation="horizontal">
 
         <TextView
-            android:fontFamily="sans-serif-black"
+            android:layout_marginTop="0dp"
+            android:fontFamily="casual"
             android:gravity="end"
             android:text="Calories\nper Serving:"
             android:textColor="@color/white"
-            android:textSize="20dp"
-            android:layout_marginTop="0dp"/>
+            android:textSize="20dp" />
 
         <EditText
             android:id="@+id/calorieET"

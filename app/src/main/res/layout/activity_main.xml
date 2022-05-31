@@ -14,7 +14,6 @@
 		android:text="" />
 
 	<Button
-
 		android:id="@+id/button"
 		android:layout_width="161dp"
 		android:layout_height="157dp"

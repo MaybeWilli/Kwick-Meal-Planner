@@ -8,26 +8,32 @@
     android:orientation="vertical">
 
     <TableRow
-        android:layout_width="350dp"
-        android:layout_height="50dp"
-        android:gravity="left"
-        android:orientation="horizontal"
+        android:layout_width="380dp"
+        android:layout_height="86dp"
+        android:layout_marginLeft="20dp"
         android:layout_marginTop="50dp"
-        android:layout_marginLeft="20dp">
+        android:gravity="left"
+        android:orientation="horizontal">
 
         <EditText
-            android:layout_width="250dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="left"
             android:id="@+id/searchMealET"
-            />
+            android:layout_width="250dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="left"
+            android:text="Enter Text Here"
+            android:fontFamily="casual"/>
+
         <Button
             android:id="@+id/searchMealButton"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="81dp"
+            android:background="@drawable/round_button"
             android:text="Search"
-            android:textSize="18dp"/>
-            <!--android:onClick="searchMeal"-->
+            android:textSize="18dp"
+            android:textColor="@color/white"
+            android:fontFamily="casual"/>
+
+        <!--android:onClick="searchMeal"-->
 
     </TableRow>
 
@@ -42,6 +48,8 @@
         android:textColor="@color/black"
         android:text="Hello"
         android:textSize="20sp"
+        android:fontFamily="casual"
+
         />
 
 
