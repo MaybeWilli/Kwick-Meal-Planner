@@ -23,6 +23,7 @@
         android:layout_gravity="center"
         android:layout_marginTop="20dp"
         android:text="Enter Meal"
+        android:fontFamily="casual"
         android:textAlignment="center"
         android:textSize="20sp"
         android:textColor="@color/black"
@@ -58,6 +59,7 @@
         android:layout_gravity="center"
         android:layout_marginTop="20dp"
         android:text="Enter Number of Servings"
+        android:fontFamily="casual"
         android:textAlignment="center"
         android:textSize="20sp"
         android:textColor="@color/black"
@@ -73,18 +75,19 @@
         android:textSize="20sp"
         android:textColor="@color/black"
         />
-    
+
     <Button
         android:id="@+id/mealSaveButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Save"
-        android:background="@color/blue"
+        android:layout_width="116dp"
+        android:layout_height="120dp"
         android:layout_gravity="center"
         android:layout_marginTop="35dp"
-        android:textColor="@color/black"
-        android:textSize="20sp"
-        android:onClick="calendarSaveMeal"/>
+        android:background="@drawable/round_button"
+        android:onClick="calendarSaveMeal"
+        android:text="Save"
+        android:fontFamily="casual"
+        android:textColor="@color/white"
+        android:textSize="20sp" />
 
 
 </LinearLayout>

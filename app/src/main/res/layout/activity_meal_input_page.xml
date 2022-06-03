@@ -95,6 +95,7 @@
             android:gravity="center_horizontal"
             android:onClick="closeInputPage"
             android:text="Cancel"
+            android:fontFamily="casual"
             android:textAllCaps="false"
             android:textSize="20dp" />
 
