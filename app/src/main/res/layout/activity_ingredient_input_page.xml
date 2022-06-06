@@ -7,22 +7,25 @@
     tools:context=".calendar_input_meal"
     android:orientation="vertical">
 
+
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/dailyMeals"
         android:layout_gravity="center"
         android:layout_marginTop="20dp"
-        android:textColor="@color/black"
+        android:text="Ingredient Name"
+        android:textAlignment="center"
         android:textSize="20sp"
+        android:textColor="@color/black"
         />
-    <TextView
-        android:id="@+id/dateTV"
-        android:layout_width="wrap_content"
+
+    <EditText
+        android:id="@+id/ingredientET"
+        android:layout_width="100sp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginTop="20dp"
-        android:text="Enter Meal"
+        android:layout_marginTop="10dp"
         android:textAlignment="center"
         android:textSize="20sp"
         android:textColor="@color/black"
@@ -31,23 +34,23 @@
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center">
-        <EditText
-            android:id="@+id/mealInputET"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp">
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginTop="20dp"
             android:textAlignment="center"
-            android:ems="10"
+            android:text="Enter food group"
+            android:textSize="20sp"
             />
 
         <Spinner
-            android:id="@+id/mealInputSpinner"
+            android:id="@+id/foodGroupSpinner"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="5dp"
             android:textAlignment="center"
             />
     </LinearLayout>
@@ -57,7 +60,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginTop="20dp"
-        android:text="Enter Number of Servings"
+        android:text="Servings per Meal"
         android:textAlignment="center"
         android:textSize="20sp"
         android:textColor="@color/black"
@@ -73,9 +76,31 @@
         android:textSize="20sp"
         android:textColor="@color/black"
         />
-    
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"
+        android:text="Calories per Serving"
+        android:textAlignment="center"
+        android:textSize="20sp"
+        android:textColor="@color/black"
+        />
+
+    <EditText
+        android:id="@+id/ingredientCaloriesET"
+        android:layout_width="100sp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"
+        android:textAlignment="center"
+        android:textSize="20sp"
+        android:textColor="@color/black"
+        />
+
     <Button
-        android:id="@+id/mealSaveButton"
+        android:id="@+id/ingredientSaveButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Save"
@@ -84,19 +109,18 @@
         android:layout_marginTop="35dp"
         android:textColor="@color/black"
         android:textSize="20sp"
-        android:onClick="calendarSaveMeal"/>
+        android:onClick="saveIngredient"/>
 
-    <TextView
-        android:id="@+id/servingsTV"
+    <Button
+        android:id="@+id/ingredientFinishButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:text="Finish"
         android:layout_gravity="center"
-        android:layout_marginTop="20dp"
-        android:text="Daily Summary:"
-        android:textAlignment="center"
-        android:textSize="20sp"
+        android:layout_marginTop="35dp"
         android:textColor="@color/black"
-        />
+        android:textSize="20sp"
+        android:onClick="closeIngredientPage"/>
 
 
 </LinearLayout>

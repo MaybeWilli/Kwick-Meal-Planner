@@ -19,6 +19,7 @@ public class calendar_input_meal extends AppCompatActivity {
     private ArrayList<String> arrayList = new ArrayList<>();
     private TextView dailyMeal;
     private EditText servingsET;
+    private TextView servingsTV;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,9 +45,16 @@ public class calendar_input_meal extends AppCompatActivity {
         mealInputSpinner.setAdapter(arrayAdapter);
 
         Log.e("hmm", "Hello3");
-        //set the meals
+        //set the meals and meal summary thing
         String mealText = "";
         float totalCalories = 0;
+
+        float vegetables = 0;
+        float grains = 0;
+        float dairy = 0;
+        float meat = 0;
+        float other = 0;
+
         Boolean hasMeals = Boolean.FALSE;
         Log.e("hmm", "Hello3.1"+MealManager.plannedMeals.size());
         if (MealManager.plannedMeals.size() != 0)
@@ -61,6 +69,34 @@ public class calendar_input_meal extends AppCompatActivity {
                     mealText = mealText + "\n-"+MealManager.plannedMeals.get(i).meal.name;
                     totalCalories += MealManager.plannedMeals.get(i).meal.calories * MealManager.plannedMeals.get(i).servings;
                     hasMeals = Boolean.TRUE;
+
+                    for (int j = 0; j < MealManager.plannedMeals.get(i).meal.servings.size(); j++)
+                    {
+                        String ingName = MealManager.plannedMeals.get(i).meal.groups.get(j);
+                        Float ingSize = MealManager.plannedMeals.get(i).meal.servings.get(j);
+                        float servingSize = MealManager.plannedMeals.get(i).servings;
+                        if (ingName.equals("Vegetables"))
+                        {
+                            vegetables += ingSize * servingSize;
+                        }
+                        else if (ingName.equals("Grains"))
+                        {
+                            grains += ingSize * servingSize;
+                        }
+                        else if (ingName.equals("Dairy"))
+                        {
+                            dairy += ingSize * servingSize;
+                        }
+                        else if (ingName.equals("Meat"))
+                        {
+                            meat += ingSize * servingSize;
+                        }
+                        else if (ingName.equals("Other"))
+                        {
+                            other += ingSize * servingSize;
+                        }
+
+                    }
                 }
                 Log.e("hmm", "Hmm");
             }
@@ -70,6 +106,13 @@ public class calendar_input_meal extends AppCompatActivity {
         {
             mealText = "Here are today's meals:" + mealText;
             mealText += "\nToday's total calories: "+totalCalories;
+            String value = "Daily Summary:\n";
+            value += "\nVegetable servings per serving: "+vegetables;
+            value += "\nGrain servings per serving: "+grains;
+            value += "\nDairy servings per serving: "+dairy;
+            value += "\nMeat servings per serving: "+meat;
+            value += "\nOther servings per serving: "+other+"\n\n";
+            servingsTV.setText(value);
         }
         Log.e("hmm", "Hello4");
         dailyMeal.setText(mealText);
@@ -82,6 +125,7 @@ public class calendar_input_meal extends AppCompatActivity {
         dateTV = findViewById(R.id.dateTV);
         dailyMeal = findViewById(R.id.dailyMeals);
         servingsET = findViewById(R.id.servingsET);
+        servingsTV = findViewById(R.id.servingsTV);
     }
 
     public void calendarSaveMeal(View view)

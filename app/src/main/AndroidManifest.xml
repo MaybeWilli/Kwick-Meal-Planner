@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ICS3U">
         <activity
+            android:name=".ingredient_input_page"
+            android:exported="false" />
+        <activity
             android:name=".DisplayMealPage"
             android:exported="false" />
         <activity

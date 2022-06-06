@@ -15,14 +15,14 @@ public class MealManager {
     public static int mealId = 0;
     public static int plannedMealId = 0;
 
-    public static void addMeal(String name) //look, I'll add some more overloads later, ok?
+    /*public static void addMeal(String name) //look, I'll add some more overloads later, ok?
     {
         Meal newMeal = new Meal(name, new ArrayList<String>());
         meals.add(newMeal);
         InsertSavedMeal insertSavedMeal = new InsertSavedMeal(name, "", 0);
         insertSavedMeal.thread.start();
         PrintElements();
-    }
+    }*/
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     public static void addMeal(String name, ArrayList<String> ingredients) //look, I'll add some more overloads later, ok?
@@ -31,34 +31,65 @@ public class MealManager {
         meals.add(newMeal);
         String ingredientStr = String.join(",", ingredients);
         Log.e("hmm", ingredientStr);
-        InsertSavedMeal insertSavedMeal = new InsertSavedMeal(name, ingredientStr, 0);
-        insertSavedMeal.thread.start();
+        //InsertSavedMeal insertSavedMeal = new InsertSavedMeal(name, ingredientStr, 0);
+        //insertSavedMeal.thread.start();
         PrintElements();
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
-    public static void addMeal(String name, ArrayList<String> ingredients, float calories)
+    public static void addMeal(String name, ArrayList<String> ingredients, float calories, ArrayList<String> groups, ArrayList<Float> servings)
     {
-        Meal newMeal = new Meal(name, new ArrayList<String>(), calories);
+        Meal newMeal = new Meal(name, new ArrayList<String>(), calories, groups, servings);
         newMeal.ingredients.addAll(ingredients);
         meals.add(newMeal);
         /*for (int i = 0; i < meals.size(); i++)
         {
             Log.e("MealManager", "First ingredient:"+meals.get(i).ingredients.get(i));
         }*/
+
+        //convert ingredient to string
         String ingredientStr = String.join(",", ingredients);
         Log.e("mealmanager", ingredientStr);
-        InsertSavedMeal insertSavedMeal = new InsertSavedMeal(name, ingredientStr, calories);
+
+        //convert food groups to string
+        String groupsStr = String.join(",", groups);
+
+        //convert servings to string
+        ArrayList<String> servingsStrList = new ArrayList<String>();
+        for (int i = 0; i < servings.size(); i++)
+        {
+            servingsStrList.add(servings.get(i).toString());
+        }
+        String servingsStr = String.join(",", servingsStrList);
+
+        InsertSavedMeal insertSavedMeal = new InsertSavedMeal(name, ingredientStr, calories, servingsStr, groupsStr);
         insertSavedMeal.thread.start();
         PrintElements();
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     public static void addPlannedMeal(Meal meal, String date, float servings)
     {
         MealManager.plannedMeals.add(new PlannedMeal(meal, date, servings));
         PrintElements();
         Log.e("hmm", "Not here either!");
-        InsertSavedPlannedMeal insertSavedPlannedMeal = new InsertSavedPlannedMeal(meal.name, date, meal.calories, servings);
+
+        //convert ingredient to string
+        String ingredientStr = String.join(",", meal.ingredients);
+        Log.e("mealmanager", ingredientStr);
+
+        //convert food groups to string
+        String groupsStr = String.join(",", meal.groups);
+
+        //convert servings to string
+        ArrayList<String> servingsStrList = new ArrayList<String>();
+        for (int i = 0; i < meal.servings.size(); i++)
+        {
+            servingsStrList.add(meal.servings.get(i).toString());
+        }
+        String servingsStr = String.join(",", servingsStrList);
+
+        InsertSavedPlannedMeal insertSavedPlannedMeal = new InsertSavedPlannedMeal(meal.name, date, meal.calories, servings, servingsStr, groupsStr);
         insertSavedPlannedMeal.thread.start();
     }
 
@@ -70,6 +101,7 @@ public class MealManager {
         }
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     public static void InstantiateArrays()
     {
         Log.e("hmm", "hmm");
@@ -83,17 +115,49 @@ public class MealManager {
         for (int i = 0; i < savedMeals.size(); i++)
         {
             mealId++;
-            MealManager.meals.add(new Meal(savedMeals.get(i).name, new ArrayList<String>(Arrays.asList(savedMeals.get(i).ingredients.split(","))), savedMeals.get(i).calories));
+            String name = savedMeals.get(i).name;
+            ArrayList<String> ingredients = new ArrayList<String>(Arrays.asList(savedMeals.get(i).ingredients.split(",")));
+            float calories = savedMeals.get(i).calories;
+            ArrayList<String> groups = new ArrayList<String>(Arrays.asList(savedMeals.get(i).groups.split(",")));
+            ArrayList<String> servingsStrList = new ArrayList<String>(Arrays.asList(savedMeals.get(i).servingsStr.split(",")));
+            ArrayList<Float> servings = new ArrayList<Float>();
+            for (int j = 0; j < servingsStrList.size(); j++)
+            {
+                servings.add(Float.parseFloat(servingsStrList.get(j)));
+            }
+            MealManager.addMeal(name, ingredients, calories, groups, servings);
+            //MealManager.meals.add(new Meal(savedMeals.get(i).name, new ArrayList<String>(Arrays.asList(savedMeals.get(i).ingredients.split(","))), savedMeals.get(i).calories));
         }
 
         MealManager.plannedMeals.clear();
         List<SavedMeal> savedPlannedMeals = MainActivity.plannedMealDao.getAll();
+        Log.e("hmm", "Past that part");
 
         plannedMealId = 0;
         for (int i = 0; i < savedPlannedMeals.size(); i++)
         {
             plannedMealId++;
-            MealManager.plannedMeals.add(new PlannedMeal(new Meal(savedPlannedMeals.get(i).name, new ArrayList<String>(), savedPlannedMeals.get(i).calories), savedPlannedMeals.get(i).date, savedPlannedMeals.get(i).servings));
+            Log.e("hmm", "Past that part2");
+            String name = savedPlannedMeals.get(i).name;
+            Log.e("hmm", "Past that part3");
+            //ArrayList<String> ingredients = new ArrayList<String>(Arrays.asList(savedPlannedMeals.get(i).ingredients.split(",")));
+            //Log.e("hmm", "Past that part4");
+            float calories = savedPlannedMeals.get(i).calories;
+            Log.e("hmm", "Past that part5");
+            ArrayList<String> groups = new ArrayList<String>(Arrays.asList(savedPlannedMeals.get(i).groups.split(",")));
+            Log.e("hmm", "Past that part6");
+            ArrayList<String> servingsStrList = new ArrayList<String>(Arrays.asList(savedPlannedMeals.get(i).servingsStr.split(",")));
+            Log.e("hmm", "Past that part7");
+            ArrayList<Float> servings = new ArrayList<Float>();
+            for (int j = 0; j < servingsStrList.size(); j++)
+            {
+                Log.e("hmm", "Past that part8");
+                servings.add(Float.parseFloat(servingsStrList.get(j)));
+            }
+            Meal meal = new Meal(name, new ArrayList<String>(), calories, groups, servings);
+            Log.e("hmm", "Past that part9");
+            MealManager.plannedMeals.add(new PlannedMeal(meal, savedPlannedMeals.get(i).date, savedPlannedMeals.get(i).servings));
+            Log.e("hmm", "Past that part10");
         }
     }
 
@@ -101,13 +165,17 @@ public class MealManager {
         Thread thread = new Thread(this, "insert_data");
         String name;
         String ingredients;
+        String servings;
+        String groups;
         float calories;
 
-        public InsertSavedMeal(String name, String ingredients, float calories)
+        public InsertSavedMeal(String name, String ingredients, float calories, String servings, String groups)
         {
             this.name = name;
             this.ingredients = ingredients;
             this.calories = calories;
+            this.groups = groups;
+            this.servings = servings;
         }
         @Override
         public void run() {
@@ -116,6 +184,8 @@ public class MealManager {
             meal.uid = mealId;
             meal.ingredients = this.ingredients;
             meal.calories = this.calories;
+            meal.groups = this.groups;
+            meal.servingsStr = this.servings;
             mealId++;
             MainActivity.savedMealDatabase.mealDao().insertOneMeal(meal);
         }
@@ -127,13 +197,17 @@ public class MealManager {
         String date;
         float calories;
         float servings;
+        String servingsStr;
+        String groupStr;
 
-        public InsertSavedPlannedMeal(String name, String date, float calories, float servings)
+        public InsertSavedPlannedMeal(String name, String date, float calories, float servings, String servingsStr, String groupStr)
         {
             this.name = name;
             this.date = date;
             this.calories = calories;
             this.servings = servings;
+            this.groupStr = groupStr;
+            this.servingsStr = servingsStr;
         }
         @Override
         public void run() {
@@ -143,6 +217,8 @@ public class MealManager {
             meal.uid = plannedMealId;
             meal.calories = this.calories;
             meal.servings = this.servings;
+            meal.servingsStr = this.servingsStr;
+            meal.groups = this.servingsStr;
             plannedMealId++;
             Log.e("hmm", "Is it here?");
             MainActivity.savedPlannedMealDatabase.mealDao().insertOneMeal(meal);

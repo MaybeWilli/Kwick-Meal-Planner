@@ -19,10 +19,16 @@ public class SavedMeal {
     @ColumnInfo(name = "meal_ingredients")
     public String ingredients;
 
+    @ColumnInfo(name = "meal_groups")
+    public String groups;
+
     @ColumnInfo(name = "meal_calories")
     public float calories;
 
     @ColumnInfo(name = "meal_servings")
     public float servings;
+
+    @ColumnInfo(name = "meal_servings_list")
+    public String servingsStr;
 
 }
