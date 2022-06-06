@@ -1,6 +1,7 @@
 package com.example.ics3u;
 
 import android.os.Bundle;
+import android.text.method.ScrollingMovementMethod;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -23,6 +24,7 @@ public class DisplayMealPage extends AppCompatActivity {
 
         //Log.e("hmm", "Why");
         mealsTV.setText(generateMealString());
+        mealsTV.setMovementMethod(new ScrollingMovementMethod());
     }
 
     private String generateMealString()

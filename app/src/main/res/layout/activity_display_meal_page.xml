@@ -42,6 +42,7 @@
         android:textColor="@color/black"
         android:text="Hello"
         android:textSize="20sp"
+        android:scrollbars="vertical"
         />
 
 
