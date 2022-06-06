@@ -3,6 +3,16 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/dukev/Documents/GitHub/Kwick-Meal-Planner/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.1905" />
+        <entry key="..\:/Users/dukev/Documents/GitHub/Kwick-Meal-Planner/app/src/main/res/drawable/ic_launcher_background.xml" value="0.1905" />
+        <entry key="..\:/Users/dukev/Documents/GitHub/Kwick-Meal-Planner/app/src/main/res/drawable/round_button.xml" value="0.1905" />
+        <entry key="..\:/Users/dukev/Documents/GitHub/Kwick-Meal-Planner/app/src/main/res/layout/activity_calendar_input_meal.xml" value="0.24166666666666667" />
+        <entry key="..\:/Users/dukev/Documents/GitHub/Kwick-Meal-Planner/app/src/main/res/layout/activity_calendar_page.xml" value="0.24166666666666667" />
+        <entry key="..\:/Users/dukev/Documents/GitHub/Kwick-Meal-Planner/app/src/main/res/layout/activity_display_meal_page.xml" value="0.24166666666666667" />
+        <entry key="..\:/Users/dukev/Documents/GitHub/Kwick-Meal-Planner/app/src/main/res/layout/activity_ingredient_input_page.xml" value="0.24166666666666667" />
+        <entry key="..\:/Users/dukev/Documents/GitHub/Kwick-Meal-Planner/app/src/main/res/layout/activity_main.xml" value="0.24166666666666667" />
+        <entry key="..\:/Users/dukev/Documents/GitHub/Kwick-Meal-Planner/app/src/main/res/layout/activity_meal_input_page.xml" value="0.24166666666666667" />
+        <entry key="..\:/Users/dukev/Documents/GitHub/Kwick-Meal-Planner/app/src/main/res/layout/calendar_cell.xml" value="0.24166666666666667" />
         <entry key="app/src/main/res/layout/activity_calendar_input_meal.xml" value="0.35625" />
         <entry key="app/src/main/res/layout/activity_ingredient_input_page.xml" value="0.26992753623188404" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.19114583333333332" />
