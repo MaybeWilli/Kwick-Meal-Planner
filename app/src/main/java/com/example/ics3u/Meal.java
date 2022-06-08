@@ -9,7 +9,9 @@ public class Meal {
     public ArrayList<String> ingredients; //ingredient list, e.x: [lettuce, chicken, fruit]
     public ArrayList<String> groups; //food groups, e.x: [vegetable, vegetable, dairy]
     public ArrayList<Float> servings; //servings for each of the ingredients, e.x: [1, 2, 3]
-    public float calories;
+    public ArrayList<Float> calories;
+    public float totalServings;
+    public float totalCalories;
 
     public Meal() //dunno why you'd ever use this...
     {
@@ -21,12 +23,13 @@ public class Meal {
         this.ingredients = ingredients;
     }
 
-    public Meal(String name, ArrayList<String> ingredients, float calories, ArrayList<String> groups, ArrayList<Float> servings) {
+    public Meal(String name, ArrayList<String> ingredients, float calories, ArrayList<String> groups, ArrayList<Float> servings, ArrayList<Float> calorieList, float totCals) {
         this.name = name;
         this.ingredients = ingredients;
-        this.calories = calories;
+        this.totalCalories = calories;
         this.groups = groups;
         this.servings = servings;
+        this.totalCalories = totCals;
     }
 }
 

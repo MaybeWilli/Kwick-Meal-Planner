@@ -37,9 +37,9 @@ public class MealManager {
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
-    public static void addMeal(String name, ArrayList<String> ingredients, float calories, ArrayList<String> groups, ArrayList<Float> servings)
+    public static void addMeal(String name, ArrayList<String> ingredients, float calories, ArrayList<String> groups, ArrayList<Float> servings, ArrayList<Float> calList, float totalCalories)
     {
-        Meal newMeal = new Meal(name, new ArrayList<String>(), calories, groups, servings);
+        Meal newMeal = new Meal(name, new ArrayList<String>(), calories, groups, servings, calList, totalCalories);
         newMeal.ingredients.addAll(ingredients);
         meals.add(newMeal);
         /*for (int i = 0; i < meals.size(); i++)
@@ -121,11 +121,15 @@ public class MealManager {
             ArrayList<String> groups = new ArrayList<String>(Arrays.asList(savedMeals.get(i).groups.split(",")));
             ArrayList<String> servingsStrList = new ArrayList<String>(Arrays.asList(savedMeals.get(i).servingsStr.split(",")));
             ArrayList<Float> servings = new ArrayList<Float>();
+            ArrayList<String> calorieList = new ArrayList<String>(Arrays.asList(savedMeals.get(i).caloriesStr.split(",")));
+            ArrayList<Float> floatCalorieList = new ArrayList<Float>();
+            Float totalServings = savedMeals.get(i).totalServings;
             for (int j = 0; j < servingsStrList.size(); j++)
             {
                 servings.add(Float.parseFloat(servingsStrList.get(j)));
+                floatCalorieList.add(Float.parseFloat(calorieList.get(j)));
             }
-            MealManager.addMeal(name, ingredients, calories, groups, servings);
+            MealManager.addMeal(name, ingredients, calories, groups, servings, floatCalorieList, totalServings);
             //MealManager.meals.add(new Meal(savedMeals.get(i).name, new ArrayList<String>(Arrays.asList(savedMeals.get(i).ingredients.split(","))), savedMeals.get(i).calories));
         }
 

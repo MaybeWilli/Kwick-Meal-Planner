@@ -3,9 +3,13 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="../../../layout/custom_preview.xml" value="0.20989583333333334" />
         <entry key="app/src/main/res/layout/activity_calendar_input_meal.xml" value="0.35625" />
+        <entry key="app/src/main/res/layout/activity_calendar_page.xml" value="0.33" />
         <entry key="app/src/main/res/layout/activity_display_meal_page.xml" value="0.15982776089159068" />
-        <entry key="app/src/main/res/layout/activity_edit_meal_view.xml" value="0.17325227963525835" />
+        <entry key="app/src/main/res/layout/activity_edit_meal_page.xml" value="0.16666666666666666" />
+        <entry key="app/src/main/res/layout/activity_edit_meal_ui.xml" value="0.21422101449275363" />
+        <entry key="app/src/main/res/layout/activity_edit_meal_view.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_ingredient_input_page.xml" value="0.26992753623188404" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.19114583333333332" />
         <entry key="app/src/main/res/layout/activity_meal_input_page.xml" value="0.1816123188405797" />

@@ -10,6 +10,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ICS3U">
         <activity
+            android:name=".EditMealUI"
+            android:exported="false" />
+        <activity
+            android:name=".EditMealPage"
+            android:exported="false" />
+        <activity
             android:name=".EditMealView"
             android:exported="false" />
         <activity

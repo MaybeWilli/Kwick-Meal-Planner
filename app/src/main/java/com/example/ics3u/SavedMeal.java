@@ -22,13 +22,19 @@ public class SavedMeal {
     @ColumnInfo(name = "meal_groups")
     public String groups;
 
-    @ColumnInfo(name = "meal_calories")
+    @ColumnInfo(name = "meal_total_calories")
     public float calories;
 
+    @ColumnInfo(name = "meal_calories_list")
+    public String caloriesStr; //calories per ingredient
+
+    @ColumnInfo(name = "meal_totalServings")
+    public float totalServings; //total servings per standard meal
+
     @ColumnInfo(name = "meal_servings")
-    public float servings;
+    public float servings; //servings for the plannedMeal
 
     @ColumnInfo(name = "meal_servings_list")
-    public String servingsStr;
+    public String servingsStr; //servings per ingredient
 
 }
