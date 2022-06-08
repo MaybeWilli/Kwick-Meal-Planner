@@ -1,11 +1,13 @@
 package com.example.ics3u;
 
 import android.content.Intent;
+import android.graphics.drawable.AnimationDrawable;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.RelativeLayout;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.room.Room;
@@ -25,6 +27,13 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        RelativeLayout relativeLayout =findViewById(R.id.mainLayout);
+
+        AnimationDrawable animationDrawable = (AnimationDrawable) relativeLayout.getBackground();
+        animationDrawable.setEnterFadeDuration(2500);
+        animationDrawable.setEnterFadeDuration(5000);
+        animationDrawable.start();
 
         Log.e("hmm", "Hello");
 

@@ -8,42 +8,44 @@
     android:orientation="vertical">
 
     <TableRow
-        android:layout_width="350dp"
-        android:layout_height="50dp"
-        android:gravity="left"
-        android:orientation="horizontal"
+        android:layout_width="376dp"
+        android:layout_height="122dp"
+        android:layout_marginLeft="20dp"
         android:layout_marginTop="50dp"
-        android:layout_marginLeft="20dp">
+        android:gravity="left"
+        android:orientation="horizontal">
 
         <EditText
-            android:layout_width="250dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="left"
             android:id="@+id/searchMealET"
-            />
+            android:layout_width="250dp"
+            android:layout_height="101dp"
+            android:layout_gravity="left" />
+
         <Button
             android:id="@+id/searchMealButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="105dp"
+            android:layout_height="103dp"
+            android:background="@drawable/round_button"
             android:text="Search"
-            android:textSize="18dp"/>
-            <!--android:onClick="searchMeal"-->
+            android:fontFamily="casual"
+            android:textColor="@color/white"
+            android:textSize="20dp"
+            android:textStyle="bold"/>
+        <!--android:onClick="searchMeal"-->
 
     </TableRow>
 
 
     <TextView
+        android:id="@+id/mealsTV"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/mealsTV"
-        android:layout_gravity="left"
-        android:layout_marginLeft="30dp"
+        android:layout_gravity="center"
         android:layout_marginTop="150dp"
-        android:textColor="@color/black"
+        android:fontFamily="casual"
         android:text="Hello"
-        android:textSize="20sp"
-        />
-
+        android:textColor="@color/black"
+        android:textSize="20sp" />
 
 
 </LinearLayout>

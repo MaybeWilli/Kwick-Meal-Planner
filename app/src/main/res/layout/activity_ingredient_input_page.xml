@@ -105,28 +105,29 @@
 
     <Button
         android:id="@+id/ingredientSaveButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Save"
-        android:background="@color/blue"
+        android:layout_width="107dp"
+        android:layout_height="102dp"
         android:layout_gravity="center"
         android:layout_marginTop="35dp"
-        android:textColor="@color/white"
-        android:textSize="20sp"
+        android:background="@drawable/round_button"
+        android:fontFamily="casual"
         android:onClick="saveIngredient"
-        android:fontFamily="casual"/>
+        android:text="Save"
+        android:textColor="@color/white"
+        android:textSize="20sp" />
 
     <Button
         android:id="@+id/ingredientFinishButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Finish"
+        android:layout_width="110dp"
+        android:layout_height="99dp"
         android:layout_gravity="center"
         android:layout_marginTop="35dp"
-        android:textColor="@color/black"
-        android:textSize="20sp"
+        android:background="@drawable/round_button"
+        android:fontFamily="casual"
         android:onClick="closeIngredientPage"
-        android:fontFamily="casual"/>
+        android:text="Finish"
+        android:textColor="@color/white"
+        android:textSize="20sp" />
 
 
 </LinearLayout>
