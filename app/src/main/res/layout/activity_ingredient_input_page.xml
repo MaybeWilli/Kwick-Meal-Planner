@@ -15,6 +15,7 @@
         android:layout_gravity="center"
         android:layout_marginTop="20dp"
         android:text="Ingredient Name"
+        android:fontFamily="casual"
         android:textAlignment="center"
         android:textSize="20sp"
         android:textColor="@color/black"
@@ -42,6 +43,7 @@
             android:layout_gravity="center"
             android:textAlignment="center"
             android:text="Enter food group"
+            android:fontFamily="casual"
             android:textSize="20sp"
             />
 
@@ -61,6 +63,7 @@
         android:layout_gravity="center"
         android:layout_marginTop="20dp"
         android:text="Servings per Meal"
+        android:fontFamily="casual"
         android:textAlignment="center"
         android:textSize="20sp"
         android:textColor="@color/black"
@@ -83,6 +86,7 @@
         android:layout_gravity="center"
         android:layout_marginTop="20dp"
         android:text="Calories per Serving"
+        android:fontFamily="casual"
         android:textAlignment="center"
         android:textSize="20sp"
         android:textColor="@color/black"
@@ -107,9 +111,10 @@
         android:background="@color/blue"
         android:layout_gravity="center"
         android:layout_marginTop="35dp"
-        android:textColor="@color/black"
+        android:textColor="@color/white"
         android:textSize="20sp"
-        android:onClick="saveIngredient"/>
+        android:onClick="saveIngredient"
+        android:fontFamily="casual"/>
 
     <Button
         android:id="@+id/ingredientFinishButton"
@@ -120,7 +125,8 @@
         android:layout_marginTop="35dp"
         android:textColor="@color/black"
         android:textSize="20sp"
-        android:onClick="closeIngredientPage"/>
+        android:onClick="closeIngredientPage"
+        android:fontFamily="casual"/>
 
 
 </LinearLayout>
