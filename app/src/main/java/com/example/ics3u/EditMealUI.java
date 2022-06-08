@@ -60,13 +60,13 @@ public class EditMealUI extends AppCompatActivity {
     public void saveIngredient(View view)
     {
         Log.e("ingredient", "I am here!");
-        if (ingredientNameET.getText().toString().equals(""))
+        /*if (ingredientNameET.getText().toString().equals(""))
         {
             //return a meal with no ingredients
             float calories = Float.parseFloat(ingredientCaloriesET.getText().toString());
             float servings = Float.parseFloat(ingredientCaloriesET.getText().toString());
             MealManager.addMeal(MealInputPage.mealName, new ArrayList<String>(), calories, new ArrayList<String>(), new ArrayList<Float>());
-        }
+        }*/
         //calories
         totalCalories += Float.parseFloat(ingredientCaloriesET.getText().toString()) * Float.parseFloat(ingredientServingsET.getText().toString());
         Log.e("ingredient", "I am here1!");
@@ -105,7 +105,7 @@ public class EditMealUI extends AppCompatActivity {
             servingsArrayList.set(i, servingsArrayList.get(i)/totalServings);
         }
         totalCalories = totalCalories/totalServings;
-        MealManager.addMeal(MealInputPage.mealName, ingredientArrayList, totalCalories, foodGroupsArrayList, servingsArrayList);
+        //MealManager.addMeal(MealInputPage.mealName, ingredientArrayList, totalCalories, foodGroupsArrayList, servingsArrayList);
         finish();
     }
 
@@ -123,6 +123,6 @@ public class EditMealUI extends AppCompatActivity {
     private void setDefaultItems()
     {
         currentIngredientSpinner.setSelection(0);
-        ingredientCaloriesET.setText(Float.parseFloat(MealManager.meals.get(EditMealPage.currentItem).calories.get(currentIngredient)));
+        //ingredientCaloriesET.setText(Float.parseFloat(MealManager.meals.get(EditMealPage.currentItem).calories.get(currentIngredient)));
     }
 }

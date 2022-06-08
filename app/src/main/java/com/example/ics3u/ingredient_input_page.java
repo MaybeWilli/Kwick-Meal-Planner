@@ -24,6 +24,7 @@ public class ingredient_input_page extends AppCompatActivity {
     private ArrayList<String> foodGroupsArrayList = new ArrayList<String>();
     private float totalCalories = 0;
     private ArrayList<Float> servingsArrayList = new ArrayList<Float>();
+    private ArrayList<Float> caloriesList = new ArrayList<Float>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,7 +57,7 @@ public class ingredient_input_page extends AppCompatActivity {
             //return a meal with no ingredients
             float calories = Float.parseFloat(ingredientCaloriesET.getText().toString());
             float servings = Float.parseFloat(ingredientCaloriesET.getText().toString());
-            MealManager.addMeal(MealInputPage.mealName, new ArrayList<String>(), calories, new ArrayList<String>(), new ArrayList<Float>());
+            MealManager.addMeal(MealInputPage.mealName, new ArrayList<String>(), calories, new ArrayList<String>(), new ArrayList<Float>(), new ArrayList<Float>(), servings);
         }
         //calories
         totalCalories += Float.parseFloat(ingredientCaloriesET.getText().toString()) * Float.parseFloat(ingredientServingsET.getText().toString());
@@ -72,6 +73,9 @@ public class ingredient_input_page extends AppCompatActivity {
         //servings
         servingsArrayList.add(Float.parseFloat(ingredientServingsET.getText().toString()));
         Log.e("ingredient", "wow");
+
+        //calorie list
+        caloriesList.add(Float.parseFloat(ingredientCaloriesET.getText().toString()));
 
         //MealManager.addMeal(MealInputPage.mealName, ingredientArrayList, totalCalories, foodGroupsArrayList, servingsArrayList);
         ingredientCaloriesET.getText().clear();
@@ -91,12 +95,12 @@ public class ingredient_input_page extends AppCompatActivity {
         {
             totalServings += servingsArrayList.get(i);
         }
-        for (int i = 0; i < servingsArrayList.size(); i++)
+        /*for (int i = 0; i < servingsArrayList.size(); i++)
         {
             servingsArrayList.set(i, servingsArrayList.get(i)/totalServings);
-        }
+        }*/
         totalCalories = totalCalories/totalServings;
-        MealManager.addMeal(MealInputPage.mealName, ingredientArrayList, totalCalories, foodGroupsArrayList, servingsArrayList);
+        MealManager.addMeal(MealInputPage.mealName, ingredientArrayList, totalCalories, foodGroupsArrayList, servingsArrayList, caloriesList, totalServings);
         finish();
     }
 }
