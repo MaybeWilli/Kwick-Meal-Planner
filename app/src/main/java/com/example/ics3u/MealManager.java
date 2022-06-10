@@ -15,6 +15,7 @@ public class MealManager {
     public static int mealId = 0;
     public static int plannedMealId = 0;
     public static List<SavedMeal> savedMeals;
+    public static List<SavedMeal> savedPlannedMeals;
 
     /*public static void addMeal(String name) //look, I'll add some more overloads later, ok?
     {
@@ -137,6 +138,27 @@ public class MealManager {
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
+    public static void deletePlannedMeal(int mealPos)
+    {
+        PlannedMeal plannedMeal = MealManager.plannedMeals.get(mealPos);
+
+        String ingredientStr = String.join(",", plannedMeal.meal.ingredients);
+        int id = 0;
+
+        for (int i = 0; i < savedPlannedMeals.size(); i++)
+        {
+            Boolean isDate = plannedMeal.date.equals(savedPlannedMeals.get(i).name);
+            if (isDate && plannedMeal.meal.name.equals(savedPlannedMeals.get(i).name) && ingredientStr.equals(savedPlannedMeals.get(i).ingredients))
+            {
+                id = i;
+                break;
+            }
+        }
+        DeleteSavedPlannedMeal deleteSavedPlannedMeal = new DeleteSavedPlannedMeal(id);
+        deleteSavedPlannedMeal.thread.start();
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.O)
     public static void updateMeal(Meal newMeal, String oldName, String oldIngredientStr)
     {
         int updateMealId = 0;
@@ -206,7 +228,6 @@ public class MealManager {
         }
 
         MealManager.plannedMeals.clear();
-        List<SavedMeal> savedPlannedMeals = MainActivity.plannedMealDao.getAll();
         //Log.e("hmm", "Past that part");
 
         plannedMealId = 0;
@@ -291,6 +312,22 @@ public class MealManager {
         public void run() {
 
             MainActivity.savedMealDatabase.mealDao().deleteOneMeal(id);
+        }
+    }
+
+    static class DeleteSavedPlannedMeal implements Runnable {
+        Thread thread = new Thread(this, "insert_data");
+        int id;
+
+        public DeleteSavedPlannedMeal(int id)
+        {
+            this.id = id;
+
+        }
+        @Override
+        public void run() {
+
+            MainActivity.savedPlannedMealDatabase.mealDao().deleteOneMeal(id);
         }
     }
 

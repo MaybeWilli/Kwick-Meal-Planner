@@ -1,13 +1,17 @@
 package com.example.ics3u;
 
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.ArrayList;
@@ -17,9 +21,13 @@ public class calendar_input_meal extends AppCompatActivity {
     private TextView dateTV;
     private Spinner mealInputSpinner;
     private ArrayList<String> arrayList = new ArrayList<>();
-    private TextView dailyMeal;
+    //private TextView dailyMeal;
     private EditText servingsET;
     private TextView servingsTV;
+    private LinearLayout layout;
+
+    private ArrayList<PlannedMeal> dailyMeals = new ArrayList<PlannedMeal>();
+    private ArrayList<Integer> mealPosList = new ArrayList<Integer>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,6 +77,8 @@ public class calendar_input_meal extends AppCompatActivity {
                     mealText = mealText + "\n-"+MealManager.plannedMeals.get(i).meal.name;
                     totalCalories += MealManager.plannedMeals.get(i).meal.calories * MealManager.plannedMeals.get(i).servings;
                     hasMeals = Boolean.TRUE;
+                    dailyMeals.add(MealManager.plannedMeals.get(i));
+                    mealPosList.add(i);
 
                     for (int j = 0; j < MealManager.plannedMeals.get(i).meal.servings.size(); j++)
                     {
@@ -115,7 +125,7 @@ public class calendar_input_meal extends AppCompatActivity {
             servingsTV.setText(value);
         }
         Log.e("hmm", "Hello4");
-        dailyMeal.setText(mealText);
+        //dailyMeal.setText(mealText);
         Log.e("hmm", "Hello5");
     }
 
@@ -123,11 +133,13 @@ public class calendar_input_meal extends AppCompatActivity {
     {
         calenderET = findViewById(R.id.mealInputET);
         dateTV = findViewById(R.id.dateTV);
-        dailyMeal = findViewById(R.id.dailyMeals);
+        //dailyMeal = findViewById(R.id.dailyMeals);
         servingsET = findViewById(R.id.servingsET);
         servingsTV = findViewById(R.id.servingsTV);
+        layout = findViewById(R.id.editLayout);
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     public void calendarSaveMeal(View view)
     {
         Meal selectedMeal = new Meal();
@@ -152,6 +164,42 @@ public class calendar_input_meal extends AppCompatActivity {
         MealManager.addPlannedMeal(selectedMeal, CalendarPage.currentDate, servings);
         Log.e("hmm", "wacky");
         finish();
+    }
+
+    public void addViews()
+    {
+        for (int i = 0; i < dailyMeals.size(); i++) {
+            View view = getLayoutInflater().inflate(R.layout.activity_edit_meal_view, null, false);
+            TextView text = view.findViewById(R.id.nameTV);
+            text.setText(dailyMeals.get(i).meal.name);
+            Button button = view.findViewById(R.id.editButton);
+            button.setTag(mealPosList.get(i));
+            button.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    //do things
+
+                    //find the current item
+                    Log.e("editing", "I am here!1");
+                    int currentItem = (int) view.getTag();
+                    Log.e("editing", "I am here!2");
+                    /*TextView textView = view.findViewById(R.id.nameTV);
+                    String name = textView.getText().toString();
+                    for (int i = 0; i < MealManager.meals.size(); i++)
+                    {
+                        if (name.equals(MealManager.meals.get(i).name))
+                        {
+                            currentItem = i;
+                            break;
+                        }
+                    }*/
+
+                    //delete meal thing
+                }
+            });
+            layout.addView(view);
+        }
+
     }
 
 }
