@@ -149,24 +149,34 @@
         android:id="@+id/ingredientSaveButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Save"
-        android:background="@color/blue"
+        android:text="Save Ingredient"
         android:layout_gravity="center"
         android:layout_marginTop="0dp"
         android:textColor="@color/black"
         android:textSize="20sp"
-        android:onClick="saveIngredient"/>
+        android:onClick="editIngredient"/>
+
+    <Button
+        android:id="@+id/ingredientRemoveButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Delete Ingredient"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        android:onClick="removeIngredient"/>
 
     <Button
         android:id="@+id/ingredientFinishButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Finish"
+        android:text="Save Changes"
         android:layout_gravity="center"
-        android:layout_marginTop="35dp"
+        android:layout_marginTop="15dp"
         android:textColor="@color/black"
         android:textSize="20sp"
-        android:onClick="closeIngredientPage"/>
+        android:onClick="saveChanges"/>
 
 
 </LinearLayout>

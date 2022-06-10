@@ -90,6 +90,7 @@ public class ingredient_input_page extends AppCompatActivity {
     @RequiresApi(api = Build.VERSION_CODES.O)
     public void closeIngredientPage(View view)
     {
+        Log.e("hmm", "This is extremely awkward");
         float totalServings = 0;
         for (int i = 0; i < servingsArrayList.size(); i++)
         {

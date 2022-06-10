@@ -22,6 +22,7 @@ public class MainActivity extends AppCompatActivity {
     public static SavedMealDatabase savedPlannedMealDatabase;// = Room.databaseBuilder(getApplicationContext(), SavedMealDatabase.class, "savedMealDatabase").build();
     public static MealDao plannedMealDao;
     public static MediaPlayer mediaPlayer;
+    public static boolean isFirstOpen = true;
     //public MealDao mealDao = savedMealDatabase.mealDao();
 
     @Override
@@ -29,16 +30,19 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Log.e("hmm", "Hello");
+        //Log.e("hmm", "Hello");
 
         //Deal with database stuff
         savedMealDatabase = Room.databaseBuilder(getApplicationContext(), SavedMealDatabase.class, "savedMealDatabase").build();
         mealDao = savedMealDatabase.mealDao();
         savedPlannedMealDatabase = Room.databaseBuilder(getApplicationContext(), SavedMealDatabase.class, "savedPlannedMealDatabase").build();
         plannedMealDao = savedPlannedMealDatabase.mealDao();
-        FetchData fetchData = new FetchData();
-        fetchData.thread.start();
 
+        if (isFirstOpen) {
+            FetchData fetchData = new FetchData();
+            fetchData.thread.start();
+        }
+        isFirstOpen = false;
         mediaPlayer = MediaPlayer.create(this, R.raw.il_vento_doro);
         mediaPlayer.setLooping(true);
         mediaPlayer.start();
@@ -114,7 +118,9 @@ public class MainActivity extends AppCompatActivity {
         @RequiresApi(api = Build.VERSION_CODES.O)
         @Override
         public void run() {
+            Log.e("fetching", "oh dear");
             MealManager.InstantiateArrays();
+            Log.e("hmm", "Bruh whyyyy");
         }
     }
 };
