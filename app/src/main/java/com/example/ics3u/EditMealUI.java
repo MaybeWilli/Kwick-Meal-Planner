@@ -49,7 +49,7 @@ public class EditMealUI extends AppCompatActivity {
         currentIngredientSpinner = findViewById(R.id.currentIngredientSpinner);
         newMeal = MealManager.meals.get(EditMealPage.currentItem);
         oldName = MealManager.meals.get(EditMealPage.currentItem).name;
-        oldName = String.join(",", MealManager.meals.get(EditMealPage.currentItem).ingredients);
+        oldIngredientStr = String.join(",", MealManager.meals.get(EditMealPage.currentItem).ingredients);
 
         ArrayList<String> foodGroups = new ArrayList<String>();
         foodGroups.add("Other");

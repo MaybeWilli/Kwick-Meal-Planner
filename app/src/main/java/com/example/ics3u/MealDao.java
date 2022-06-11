@@ -18,6 +18,8 @@ public interface MealDao {
     @Update()
     public void updateOneMeal(SavedMeal savedMeal);
 
+    @Query("DELETE FROM savedmeal WHERE meal_name = :mealName")
+    public void deleteAllMealsWithName(String mealName);
 
     @Query("SELECT * FROM savedmeal")
     public List<SavedMeal> getAll();

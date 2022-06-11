@@ -114,19 +114,22 @@ public class calendar_input_meal extends AppCompatActivity {
         Log.e("hmm", "hello3.4");
         if (hasMeals)
         {
-            mealText = "Here are today's meals:" + mealText;
-            mealText += "\nToday's total calories: "+totalCalories;
+            //mealText = "Here are today's meals:" + mealText;
+            //mealText += "\nToday's total calories: "+totalCalories;
             String value = "Daily Summary:\n";
             value += "\nVegetable servings per serving: "+vegetables;
             value += "\nGrain servings per serving: "+grains;
             value += "\nDairy servings per serving: "+dairy;
             value += "\nMeat servings per serving: "+meat;
-            value += "\nOther servings per serving: "+other+"\n\n";
+            value += "\nOther servings per serving: "+other;
+            value += "\nToday's total calories: "+totalCalories+"\n\n";
             servingsTV.setText(value);
         }
         Log.e("hmm", "Hello4");
         //dailyMeal.setText(mealText);
         Log.e("hmm", "Hello5");
+
+        addViews();
     }
 
     private void initWidgets()
@@ -169,12 +172,13 @@ public class calendar_input_meal extends AppCompatActivity {
     public void addViews()
     {
         for (int i = 0; i < dailyMeals.size(); i++) {
-            View view = getLayoutInflater().inflate(R.layout.activity_edit_meal_view, null, false);
+            View view = getLayoutInflater().inflate(R.layout.activity_edit_planned_meal_view, null, false);
             TextView text = view.findViewById(R.id.nameTV);
             text.setText(dailyMeals.get(i).meal.name);
-            Button button = view.findViewById(R.id.editButton);
+            Button button = view.findViewById(R.id.deleteButton);
             button.setTag(mealPosList.get(i));
             button.setOnClickListener(new View.OnClickListener() {
+                @RequiresApi(api = Build.VERSION_CODES.O)
                 @Override
                 public void onClick(View view) {
                     //do things
@@ -182,7 +186,10 @@ public class calendar_input_meal extends AppCompatActivity {
                     //find the current item
                     Log.e("editing", "I am here!1");
                     int currentItem = (int) view.getTag();
-                    Log.e("editing", "I am here!2");
+                    dailyMeals.remove(mealPosList.indexOf(currentItem));
+                    mealPosList.remove(currentItem);
+                    MealManager.deletePlannedMeal(currentItem);
+                    updateViews();
                     /*TextView textView = view.findViewById(R.id.nameTV);
                     String name = textView.getText().toString();
                     for (int i = 0; i < MealManager.meals.size(); i++)
@@ -200,6 +207,12 @@ public class calendar_input_meal extends AppCompatActivity {
             layout.addView(view);
         }
 
+    }
+
+    private void updateViews()
+    {
+        layout.removeAllViews();
+        addViews();
     }
 
 }

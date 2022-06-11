@@ -129,11 +129,23 @@ public class MealManager {
         int id = 0;
         for (int i = 0; i < savedMeals.size(); i++) {
             if (meal.name.equals(savedMeals.get(i).name) && ingredientStr.equals(savedMeals.get(i).ingredients)) {
-                id = i;
+                id = savedMeals.get(i).uid;
                 break;
             }
         }
-        DeleteSavedMeal deleteSavedMeal = new DeleteSavedMeal(id);
+
+        //delete relevant planned meals from arrayList
+        for (int i = 0; i <plannedMeals.size(); i++)
+        {
+            if (meal.name.equals(plannedMeals.get(i).meal.name))
+            {
+                plannedMeals.remove(i);
+                i = 0;
+            }
+        }
+        Log.e("threadTesting", "I am here!");
+        //delete from savedMealDatabase
+        DeleteSavedMeal deleteSavedMeal = new DeleteSavedMeal(id, meal.name);
         deleteSavedMeal.thread.start();
     }
 
@@ -164,8 +176,10 @@ public class MealManager {
         int updateMealId = 0;
 
         for (int i = 0; i < savedMeals.size(); i++) {
+            Log.e("updating", oldName+" "+savedMeals.get(i).name+" "+oldIngredientStr+" "+savedMeals.get(i).ingredients);
             if (oldName.equals(savedMeals.get(i).name) && oldIngredientStr.equals(savedMeals.get(i).ingredients)) {
-                updateMealId = i;
+                updateMealId = savedMeals.get(i).uid;
+                Log.e("updating", "Match found!");
                 break;
             }
         }
@@ -229,6 +243,7 @@ public class MealManager {
 
         MealManager.plannedMeals.clear();
         //Log.e("hmm", "Past that part");
+        savedPlannedMeals = MainActivity.plannedMealDao.getAll();
 
         plannedMealId = 0;
         for (int i = 0; i < savedPlannedMeals.size(); i++)
@@ -287,7 +302,7 @@ public class MealManager {
         public void run() {
             SavedMeal meal = new SavedMeal();
             meal.name = this.name;
-            meal.uid = mealId;
+            //meal.uid = mealId;
             meal.ingredients = this.ingredients;
             meal.calories = this.calories;
             meal.groups = this.groups;
@@ -295,6 +310,7 @@ public class MealManager {
             meal.caloriesStr = this.calorieStr;
             meal.totalServings = this.totalServings;
             mealId++;
+            meal.uid = mealId;
             MainActivity.savedMealDatabase.mealDao().insertOneMeal(meal);
         }
     }
@@ -302,16 +318,19 @@ public class MealManager {
     static class DeleteSavedMeal implements Runnable {
         Thread thread = new Thread(this, "insert_data");
         int id;
+        String name;
 
-        public DeleteSavedMeal(int id)
+        public DeleteSavedMeal(int id, String name)
         {
             this.id = id;
+            this.name = name;
 
         }
         @Override
         public void run() {
 
             MainActivity.savedMealDatabase.mealDao().deleteOneMeal(id);
+            MainActivity.savedPlannedMealDatabase.mealDao().deleteAllMealsWithName(name);
         }
     }
 
@@ -328,6 +347,22 @@ public class MealManager {
         public void run() {
 
             MainActivity.savedPlannedMealDatabase.mealDao().deleteOneMeal(id);
+        }
+    }
+
+    static class DeleteSavedPlannedMealByName implements Runnable {
+        Thread thread = new Thread(this, "insert_data");
+        String name;
+
+        public DeleteSavedPlannedMealByName(String name)
+        {
+            this.name = name;
+
+        }
+        @Override
+        public void run() {
+
+            MainActivity.savedPlannedMealDatabase.mealDao().deleteAllMealsWithName(name);
         }
     }
 
