@@ -11,7 +11,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Main Menu"
-        android:layout_centerVertical="true"
+        android:layout_marginTop="300dp"
         android:layout_centerHorizontal="true" />
 
 	<Button
@@ -43,5 +43,19 @@
 		android:layout_below="@+id/displayMealPageButton"
 		android:layout_centerHorizontal="true"
 		android:text="Open Meal Edit" />
+	<Button
+		android:id="@+id/shoppingListButton"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_below="@+id/editMealPageButton"
+		android:layout_centerHorizontal="true"
+		android:text="Open Shopping List" />
+	<Button
+		android:id="@+id/songButton"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_below="@+id/shoppingListButton"
+		android:layout_centerHorizontal="true"
+		android:text="Open Song Page" />
 
 </RelativeLayout>

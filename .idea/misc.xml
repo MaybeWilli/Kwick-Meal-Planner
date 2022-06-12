@@ -14,6 +14,9 @@
         <entry key="app/src/main/res/layout/activity_ingredient_input_page.xml" value="0.26992753623188404" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.19114583333333332" />
         <entry key="app/src/main/res/layout/activity_meal_input_page.xml" value="0.1816123188405797" />
+        <entry key="app/src/main/res/layout/activity_music_page.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/activity_music_selection.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/activity_shopping_list.xml" value="0.19114583333333332" />
         <entry key="app/src/main/res/layout/calendar_cell.xml" value="0.17325227963525835" />
       </map>
     </option>

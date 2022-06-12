@@ -17,6 +17,8 @@ public class MainActivity extends AppCompatActivity {
     private Button button2;
     private Button button3;
     private Button button4;
+    private Button button5;
+    private Button button6;
     public static SavedMealDatabase savedMealDatabase;// = Room.databaseBuilder(getApplicationContext(), SavedMealDatabase.class, "savedMealDatabase").build();
     public static MealDao mealDao;
     public static SavedMealDatabase savedPlannedMealDatabase;// = Room.databaseBuilder(getApplicationContext(), SavedMealDatabase.class, "savedMealDatabase").build();
@@ -88,6 +90,20 @@ public class MainActivity extends AppCompatActivity {
                 openEditMealPage();
             }
         });
+        button5 = (Button) findViewById(R.id.songButton);
+        button5.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openSongSelection();
+            }
+        });
+        button6 = (Button) findViewById(R.id.shoppingListButton);
+        button6.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openShoppingList();
+            }
+        });
     }
 
     public void openActivity2() {
@@ -111,6 +127,30 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(this, EditMealPage.class);
         startActivity(intent);
     }
+
+    public void openSongSelection()
+    {
+        Intent intent = new Intent(this, MusicSelection.class);
+        startActivity(intent);
+        MusicSelection.context = this;
+    }
+
+    public void openShoppingList()
+    {
+        Intent intent = new Intent(this, ShoppingList.class);
+        startActivity(intent);
+    }
+
+    /*public static void ChooseSong(int song)
+    {
+        if (song == 0)
+        {
+            mediaPlayer.stop();
+            mediaPlayer = new MediaPlayer(this, R.raw.domestic_no_kanojo_op);
+            mediaPlayer.setLooping(true);
+            mediaPlayer.start();
+        }
+    }*/
 
     class FetchData implements Runnable {
         Thread thread = new Thread(this, "fetch_data");
