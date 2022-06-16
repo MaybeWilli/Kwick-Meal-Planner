@@ -104,6 +104,7 @@ public class MealManager {
         String calStr = String.join(",", calList);
 
         InsertSavedPlannedMeal insertSavedPlannedMeal = new InsertSavedPlannedMeal(meal.name, ingredientStr, date, meal.calories, servings, servingsStr, groupsStr, calStr, meal.totalServings);
+        //String name, String ingredients, String date, float calories, float servings, String servingsStr, String groupStr, String calorieStr, float totalServings)
         //(String name, String date, float calories, float servings, String servingsStr, String groupStr, String calorieStr, float totalServings)
         insertSavedPlannedMeal.thread.start();
     }
@@ -429,7 +430,7 @@ public class MealManager {
             meal.calories = this.calories;
             meal.servings = this.servings;
             meal.servingsStr = this.servingsStr;
-            meal.groups = this.servingsStr;
+            meal.groups = this.groupStr;
             meal.caloriesStr = this.calorieStr;
             meal.totalServings = this.totalServings;
             meal.ingredients = this.ingredients;

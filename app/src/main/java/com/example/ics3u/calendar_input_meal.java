@@ -28,6 +28,7 @@ public class calendar_input_meal extends AppCompatActivity {
 
     private ArrayList<PlannedMeal> dailyMeals = new ArrayList<PlannedMeal>();
     private ArrayList<Integer> mealPosList = new ArrayList<Integer>();
+    private float dailyTotalServings;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -85,10 +86,12 @@ public class calendar_input_meal extends AppCompatActivity {
                     for (int j = 0; j < MealManager.plannedMeals.get(i).meal.servings.size(); j++)
                     {
                         totalServings += MealManager.plannedMeals.get(i).meal.servings.get(j);
+                        dailyTotalServings += MealManager.plannedMeals.get(i).meal.servings.get(j);
                     }
 
                     for (int j = 0; j < MealManager.plannedMeals.get(i).meal.servings.size(); j++)
                     {
+                        Log.e("mealinput", "I am here!");
                         totalCalories += MealManager.plannedMeals.get(i).meal.caloriesList.get(j)/totalServings*MealManager.plannedMeals.get(i).servings;
                         String ingName = MealManager.plannedMeals.get(i).meal.groups.get(j);
                         float servingSize = MealManager.plannedMeals.get(i).meal.servings.get(j);
@@ -124,12 +127,14 @@ public class calendar_input_meal extends AppCompatActivity {
             //mealText = "Here are today's meals:" + mealText;
             //mealText += "\nToday's total calories: "+totalCalories;
             String value = "Daily Summary:\n";
-            value += "\nVegetable servings per serving: "+(Math.round(vegetables*100.0)/100.0);
-            value += "\nGrain servings per serving: "+(Math.round(grains*100.0)/100.0);
-            value += "\nDairy servings per serving: "+(Math.round(dairy*100.0)/100.0);
-            value += "\nMeat servings per serving: "+(Math.round(meat*100.0)/100.0);
-            value += "\nOther servings per serving: "+(Math.round(other*100.0)/100.0);
-            value += "\nToday's total calories: "+(Math.round(totalCalories*100.0)/100.0)+"\n\n";
+            value += "\nVegetable servings per serving: "+(Math.round(vegetables*dailyTotalServings*100.0)/100.0);//*dailyTotalServings;
+            value += "\nGrain servings per serving: "+(Math.round(grains*100.0)/100.0)*dailyTotalServings;
+            value += "\nDairy servings per serving: "+(Math.round(dairy*100.0)/100.0)*dailyTotalServings;
+            value += "\nMeat servings per serving: "+(Math.round(meat*100.0)/100.0)*dailyTotalServings;
+            value += "\nOther servings per serving: "+(Math.round(other*100.0)/100.0)*dailyTotalServings;
+            value += "\nToday's total calories: "+(Math.round(totalCalories*100.0)/100.0)*dailyTotalServings+"\n\n";
+            Float a = vegetables;
+            Log.e("inputmeal", a.toString());
             servingsTV.setText(value);
         }
         Log.e("hmm", "Hello4");
