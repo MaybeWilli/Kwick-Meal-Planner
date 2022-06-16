@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".calendar_input_meal"
+    android:orientation="vertical">
+
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"
+        android:text="Meal Name"
+        android:textAlignment="center"
+        android:textSize="20sp"
+        android:textColor="@color/black"
+        />
+
+    <EditText
+        android:id="@+id/nameET"
+        android:layout_width="100sp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:textAlignment="center"
+        android:textSize="20sp"
+        android:textColor="@color/black"
+        />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:textAlignment="center"
+            android:text="Current Ingredient"
+            android:textSize="20sp"
+            />
+
+        <Spinner
+            android:id="@+id/currentIngredientSpinner"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="5dp"
+            android:textAlignment="center"
+            />
+    </LinearLayout>
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="5dp"
+        android:text="Ingredient Name"
+        android:textAlignment="center"
+        android:textSize="20sp"
+        android:textColor="@color/black"
+        />
+
+    <EditText
+        android:id="@+id/ingredientET"
+        android:layout_width="100sp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="5dp"
+        android:textAlignment="center"
+        android:textSize="20sp"
+        android:textColor="@color/black"
+        />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:textAlignment="center"
+            android:text="Enter food group"
+            android:textSize="20sp"
+            />
+
+        <Spinner
+            android:id="@+id/foodGroupSpinner"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="5dp"
+            android:textAlignment="center"
+            />
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"
+        android:text="Servings per Meal"
+        android:textAlignment="center"
+        android:textSize="20sp"
+        android:textColor="@color/black"
+        />
+
+    <EditText
+        android:id="@+id/servingsET"
+        android:layout_width="100sp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="5dp"
+        android:textAlignment="center"
+        android:textSize="20sp"
+        android:textColor="@color/black"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="5dp"
+        android:text="Calories per Serving"
+        android:textAlignment="center"
+        android:textSize="20sp"
+        android:textColor="@color/black"
+        />
+
+    <EditText
+        android:id="@+id/ingredientCaloriesET"
+        android:layout_width="100sp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"
+        android:textAlignment="center"
+        android:textSize="20sp"
+        android:textColor="@color/black"
+        />
+
+    <Button
+        android:id="@+id/ingredientSaveButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Save Ingredient"
+        android:layout_gravity="center"
+        android:layout_marginTop="0dp"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        android:onClick="editIngredient"/>
+
+    <Button
+        android:id="@+id/ingredientRemoveButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Delete Ingredient"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        android:onClick="removeIngredient"/>
+
+    <Button
+        android:id="@+id/ingredientAddButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Delete Ingredient"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        android:onClick="addNewIngredient"/>
+
+    <Button
+        android:id="@+id/ingredientFinishButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Save Changes"
+        android:layout_gravity="center"
+        android:layout_marginTop="15dp"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        android:onClick="saveChanges"/>
+
+
+</LinearLayout>

@@ -10,6 +10,45 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ICS3U">
         <activity
+            android:name=".ShoppingList"
+            android:exported="false" />
+        <activity
+            android:name=".MusicSelection"
+            android:exported="false" />
+        <activity
+            android:name=".MusicPage"
+            android:exported="false" />
+        <activity
+            android:name=".EditPlannedMealView"
+            android:exported="false" />
+        <activity
+            android:name=".EditMealUI"
+            android:exported="false" />
+        <activity
+            android:name=".EditMealPage"
+            android:exported="false" />
+        <activity
+            android:name=".EditMealView"
+            android:exported="false" />
+        <activity
+            android:name=".EditMealHolder"
+            android:exported="false" />
+        <activity
+            android:name=".ingredient_input_page"
+            android:exported="false" />
+        <activity
+            android:name=".DisplayMealPage"
+            android:exported="false" />
+        <activity
+            android:name=".MealInputPage"
+            android:exported="false" />
+        <activity
+            android:name=".calendar_input_meal"
+            android:exported="false" />
+        <activity
+            android:name=".CalendarPage"
+            android:exported="false" />
+        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
