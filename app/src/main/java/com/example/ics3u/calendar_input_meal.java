@@ -34,7 +34,7 @@ public class calendar_input_meal extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_calendar_input_meal);
 
         RelativeLayout relativeLayout =findViewById(R.id.mainLayout);
 

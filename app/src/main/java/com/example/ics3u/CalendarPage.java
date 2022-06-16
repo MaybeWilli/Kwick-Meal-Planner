@@ -108,6 +108,7 @@ public class CalendarPage extends AppCompatActivity implements CalendarAdapter.O
             Toast.makeText(this, message, Toast.LENGTH_LONG).show();
         }//*/
         currentDate = dayText + " " + monthYearFromDate(selectedDate);
+        Log.e("calendarthings", currentDate);
         Intent intent = new Intent(this, calendar_input_meal.class);
         startActivity(intent);
     }
