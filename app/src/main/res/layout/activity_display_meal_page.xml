@@ -1,50 +1,72 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".calendar_input_meal"
-    android:orientation="vertical">
+    android:background="@drawable/gradient_list"
+    android:id="@+id/mainLayout">
 
     <TableRow
         android:layout_width="350dp"
         android:layout_height="50dp"
-        android:gravity="left"
-        android:orientation="horizontal"
+        android:layout_alignParentEnd="true"
+        android:layout_marginLeft="20dp"
         android:layout_marginTop="50dp"
-        android:layout_marginLeft="20dp">
+        android:layout_marginEnd="41dp"
+        android:gravity="left"
+        android:orientation="horizontal">
 
-        <EditText
-            android:layout_width="250dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="left"
-            android:id="@+id/searchMealET"
-            />
-        <Button
-            android:id="@+id/searchMealButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Search"
-            android:textSize="18dp"/>
-            <!--android:onClick="searchMeal"-->
+        <!--android:onClick="searchMeal"-->
 
     </TableRow>
 
 
     <TextView
+        android:id="@+id/mealsTV"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/mealsTV"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
         android:layout_gravity="left"
         android:layout_marginLeft="30dp"
-        android:layout_marginTop="150dp"
-        android:textColor="@color/black"
-        android:text="Hello"
-        android:textSize="20sp"
+        android:layout_marginTop="210dp"
+        android:layout_marginEnd="320dp"
+        android:fontFamily="casual"
         android:scrollbars="vertical"
+        android:text="Hello"
+        android:textColor="@color/white"
+        android:textSize="20sp"
         />
 
+    <Button
+        android:id="@+id/searchMealButton"
+        android:layout_width="wrap_content"
+        android:layout_height="91dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="36dp"
+        android:layout_marginBottom="571dp"
+        android:background="@drawable/round_button"
+        android:fontFamily="casual"
+        android:fontFeatureSettings="@string/material_motion_easing_standard"
+        android:gravity="center_vertical|center_horizontal"
+        android:text="Search"
+        android:textColor="#fff"
+        android:textSize="20dp" />
+
+    <EditText
+        android:id="@+id/searchMealET"
+        android:layout_width="251dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_gravity="left"
+        android:layout_marginEnd="129dp"
+        android:layout_marginBottom="592dp"
+        android:backgroundTint="@color/white"
+        android:textColor="@color/white"/>
 
 
-</LinearLayout>
+</RelativeLayout>

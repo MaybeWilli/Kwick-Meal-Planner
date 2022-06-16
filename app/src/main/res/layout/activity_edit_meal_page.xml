@@ -4,16 +4,20 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".MainActivity"
+    android:background="@drawable/gradient_list"
+    android:id="@+id/mainLayout">
 
     <TextView
         android:id="@+id/title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Edit Meal Page"
-        android:layout_marginTop="20sp"
         android:layout_centerHorizontal="true"
-        android:textSize="40sp"/>
+        android:layout_marginTop="20sp"
+        android:text="Edit Meal Page"
+        android:textSize="40sp"
+        android:fontFamily="casual"
+        android:textColor="@color/white"/>
 
     <ScrollView
         android:layout_width="300dp"

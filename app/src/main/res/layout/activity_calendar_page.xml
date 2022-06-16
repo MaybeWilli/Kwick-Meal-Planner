@@ -23,7 +23,8 @@
 			android:background="@null"
 			android:textStyle="bold"
 			android:onClick="previousMonthAction"
-			android:textSize="20sp"/>
+			android:textSize="20sp"
+			android:fontFamily="casual"/>
 
 		<TextView
 			android:id="@+id/monthYearText"
@@ -33,7 +34,8 @@
 			android:text="April 2022"
 			android:textSize="20sp"
 			android:textAlignment="center"
-			android:textColor="@color/black"/>
+			android:textColor="@color/black"
+			android:fontFamily="casual"/>
 
 		<Button
 			android:layout_width="0dp"
@@ -44,7 +46,8 @@
 			android:background="@null"
 			android:textStyle="bold"
 			android:onClick="nextMonthAction"
-			android:textSize="20sp"/>
+			android:textSize="20sp"
+			android:fontFamily="casual"/>
 
 
 	</LinearLayout>
@@ -62,7 +65,8 @@
 			android:text="Sun"
 			android:textColor="@color/gray"
 			android:textAlignment="center"
-			android:textSize="16sp"/>
+			android:textSize="16sp"
+			android:fontFamily="casual"/>
 		<TextView
 			android:layout_width="0dp"
 			android:layout_height="wrap_content"
@@ -70,7 +74,8 @@
 			android:text="Mon"
 			android:textColor="@color/gray"
 			android:textAlignment="center"
-			android:textSize="16sp"/>
+			android:textSize="16sp"
+			android:fontFamily="casual"/>
 		<TextView
 			android:layout_width="0dp"
 			android:layout_height="wrap_content"
@@ -78,7 +83,8 @@
 			android:text="Tue"
 			android:textColor="@color/gray"
 			android:textAlignment="center"
-			android:textSize="16sp"/>
+			android:textSize="16sp"
+			android:fontFamily="casual"/>
 		<TextView
 			android:layout_width="0dp"
 			android:layout_height="wrap_content"
@@ -86,7 +92,8 @@
 			android:text="Wed"
 			android:textColor="@color/gray"
 			android:textAlignment="center"
-			android:textSize="16sp"/>
+			android:textSize="16sp"
+			android:fontFamily="casual"/>
 		<TextView
 			android:layout_width="0dp"
 			android:layout_height="wrap_content"
@@ -94,7 +101,8 @@
 			android:text="Thu"
 			android:textColor="@color/gray"
 			android:textAlignment="center"
-			android:textSize="16sp"/>
+			android:textSize="16sp"
+			android:fontFamily="casual"/>
 		<TextView
 			android:layout_width="0dp"
 			android:layout_height="wrap_content"
@@ -102,7 +110,8 @@
 			android:text="Fri"
 			android:textColor="@color/gray"
 			android:textAlignment="center"
-			android:textSize="16sp"/>
+			android:textSize="16sp"
+			android:fontFamily="casual"/>
 		<TextView
 			android:layout_width="0dp"
 			android:layout_height="wrap_content"
@@ -110,7 +119,8 @@
 			android:text="Sat"
 			android:textColor="@color/gray"
 			android:textAlignment="center"
-			android:textSize="16sp"/>
+			android:textSize="16sp"
+			android:fontFamily="casual"/>
 	</LinearLayout>
 
 	<androidx.recyclerview.widget.RecyclerView

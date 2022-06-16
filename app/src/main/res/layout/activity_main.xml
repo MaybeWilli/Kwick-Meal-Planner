@@ -1,61 +1,118 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".MainActivity">
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	tools:context=".MainActivity"
+	android:background="@drawable/gradient_list"
+	android:id="@+id/mainLayout">
 
-    <TextView
-    		android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Main Menu"
-        android:layout_marginTop="300dp"
-        android:layout_centerHorizontal="true" />
+	<TextView
+		android:id="@+id/textView"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_centerHorizontal="true"
+		android:layout_marginTop="300dp"/>
 
 	<Button
 		android:id="@+id/button"
-		android:layout_width="wrap_content"
-		android:layout_height="wrap_content"
+		android:layout_width="146dp"
+		android:layout_height="137dp"
 		android:layout_below="@+id/textView"
+		android:layout_alignParentEnd="true"
 		android:layout_centerHorizontal="true"
-		android:text="Open Calendar" />
+		android:layout_marginTop="-274dp"
+		android:layout_marginEnd="212dp"
+		android:background="@drawable/round_button"
+		android:fontFamily="casual"
+		android:fontFeatureSettings="@string/material_motion_easing_standard"
+		android:gravity="center_vertical|center_horizontal"
+		android:text="Open Calendar"
+		android:textColor="#fff"
+		android:textSize="20dp" />
 
 	<Button
 		android:id="@+id/inputMealPageButton"
-		android:layout_width="wrap_content"
-		android:layout_height="wrap_content"
-		android:layout_below="@+id/button"
-		android:layout_centerHorizontal="true"
-		android:text="Open Meal Input" />
+		android:layout_width="127dp"
+		android:layout_height="130dp"
+		android:layout_alignTop="@+id/button"
+		android:layout_alignEnd="@+id/textView"
+		android:layout_marginTop="184dp"
+		android:layout_marginEnd="42dp"
+		android:background="@drawable/round_button"
+		android:fontFamily="casual"
+		android:fontFeatureSettings="@string/material_motion_easing_standard"
+		android:gravity="center_vertical|center_horizontal"
+		android:text="Open Meal Input"
+		android:textColor="#fff"
+		android:textSize="20dp" />
+
 	<Button
 		android:id="@+id/displayMealPageButton"
-		android:layout_width="wrap_content"
-		android:layout_height="wrap_content"
+		android:layout_width="115dp"
+		android:layout_height="111dp"
 		android:layout_below="@+id/inputMealPageButton"
-		android:layout_centerHorizontal="true"
-		android:text="Open Meal Display" />
+		android:layout_alignParentEnd="true"
+		android:layout_marginTop="-197dp"
+		android:layout_marginEnd="67dp"
+		android:background="@drawable/round_button"
+		android:fontFamily="casual"
+		android:fontFeatureSettings="@string/material_motion_easing_standard"
+		android:gravity="center_vertical|center_horizontal"
+		android:text="Meal Display"
+		android:textColor="#fff"
+		android:textSize="20dp" />
+
 	<Button
 		android:id="@+id/editMealPageButton"
-		android:layout_width="wrap_content"
-		android:layout_height="wrap_content"
+		android:layout_width="128dp"
+		android:layout_height="124dp"
 		android:layout_below="@+id/displayMealPageButton"
+		android:layout_alignParentEnd="true"
 		android:layout_centerHorizontal="true"
-		android:text="Open Meal Edit" />
+		android:layout_marginTop="122dp"
+		android:layout_marginEnd="10dp"
+		android:background="@drawable/round_button"
+		android:fontFamily="casual"
+		android:fontFeatureSettings="@string/material_motion_easing_standard"
+		android:gravity="center_vertical|center_horizontal"
+		android:text="Open Meal Edit"
+		android:textColor="#fff"
+		android:textSize="20dp" />
+
 	<Button
 		android:id="@+id/shoppingListButton"
-		android:layout_width="wrap_content"
-		android:layout_height="wrap_content"
+		android:layout_width="116dp"
+		android:layout_height="105dp"
 		android:layout_below="@+id/editMealPageButton"
+		android:layout_alignParentEnd="true"
 		android:layout_centerHorizontal="true"
-		android:text="Open Shopping List" />
+		android:layout_marginTop="-72dp"
+		android:layout_marginEnd="252dp"
+		android:background="@drawable/round_button"
+		android:fontFamily="casual"
+		android:fontFeatureSettings="@string/material_motion_easing_standard"
+		android:gravity="center_vertical|center_horizontal"
+		android:text="Open Shopping List"
+		android:textColor="#fff"
+		android:textSize="20dp" />
+
 	<Button
 		android:id="@+id/songButton"
-		android:layout_width="wrap_content"
-		android:layout_height="wrap_content"
+		android:layout_width="136dp"
+		android:layout_height="129dp"
 		android:layout_below="@+id/shoppingListButton"
+		android:layout_alignParentEnd="true"
 		android:layout_centerHorizontal="true"
-		android:text="Open Song Page" />
+		android:layout_marginTop="6dp"
+		android:layout_marginEnd="75dp"
+		android:background="@drawable/round_button"
+		android:fontFamily="casual"
+		android:fontFeatureSettings="@string/material_motion_easing_standard"
+		android:gravity="center_vertical|center_horizontal"
+		android:text="Open Song Page"
+		android:textColor="#fff"
+		android:textSize="20dp" />
 
 </RelativeLayout>

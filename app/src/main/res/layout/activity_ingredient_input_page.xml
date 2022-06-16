@@ -1,126 +1,173 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".calendar_input_meal"
-    android:orientation="vertical">
-
+    tools:context=".MainActivity"
+    android:background="@drawable/gradient_list"
+    android:id="@+id/mainLayout">
 
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
         android:layout_gravity="center"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="61dp"
+        android:layout_marginEnd="229dp"
+        android:fontFamily="casual"
         android:text="Ingredient Name"
         android:textAlignment="center"
-        android:textSize="20sp"
-        android:textColor="@color/black"
-        />
+        android:textColor="@color/white"
+        android:textSize="20sp" />
 
     <EditText
         android:id="@+id/ingredientET"
         android:layout_width="100sp"
         android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
         android:layout_gravity="center"
         android:layout_marginTop="10dp"
+        android:layout_marginEnd="121dp"
+        android:layout_marginBottom="636dp"
+        android:backgroundTint="@color/white"
         android:textAlignment="center"
-        android:textSize="20sp"
-        android:textColor="@color/black"
-        />
+        android:textColor="@color/white"
+        android:textSize="20sp" />
 
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginTop="10dp">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:textAlignment="center"
-            android:text="Enter food group"
-            android:textSize="20sp"
-            />
 
-        <Spinner
-            android:id="@+id/foodGroupSpinner"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="5dp"
-            android:textAlignment="center"
-            />
     </LinearLayout>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
         android:layout_gravity="center"
         android:layout_marginTop="20dp"
+        android:layout_marginEnd="108dp"
+        android:layout_marginBottom="544dp"
+        android:fontFamily="casual"
         android:text="Servings per Meal"
         android:textAlignment="center"
-        android:textSize="20sp"
-        android:textColor="@color/black"
-        />
+        android:textColor="@color/white"
+        android:textSize="20sp" />
 
     <EditText
         android:id="@+id/servingsET"
         android:layout_width="100sp"
         android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
         android:layout_gravity="center"
         android:layout_marginTop="20dp"
+        android:layout_marginEnd="5dp"
+        android:layout_marginBottom="536dp"
         android:textAlignment="center"
+        android:textColor="@color/white"
         android:textSize="20sp"
-        android:textColor="@color/black"
-        />
+        android:backgroundTint="@color/white"/>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
         android:layout_gravity="center"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="220dp"
+        android:layout_marginEnd="238dp"
+        android:fontFamily="casual"
         android:text="Calories per Serving"
         android:textAlignment="center"
-        android:textSize="20sp"
-        android:textColor="@color/black"
-        />
+        android:textColor="@color/white"
+        android:textSize="20sp" />
 
     <EditText
         android:id="@+id/ingredientCaloriesET"
         android:layout_width="100sp"
         android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
         android:layout_gravity="center"
         android:layout_marginTop="20dp"
+        android:layout_marginEnd="140dp"
+        android:layout_marginBottom="454dp"
         android:textAlignment="center"
+        android:textColor="@color/white"
         android:textSize="20sp"
-        android:textColor="@color/black"
-        />
+        android:backgroundTint="@color/white"/>
 
     <Button
         android:id="@+id/ingredientSaveButton"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Save"
-        android:background="@color/blue"
+        android:layout_height="82dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
         android:layout_gravity="center"
         android:layout_marginTop="35dp"
-        android:textColor="@color/black"
-        android:textSize="20sp"
-        android:onClick="saveIngredient"/>
+        android:layout_marginEnd="237dp"
+        android:layout_marginBottom="266dp"
+        android:background="@drawable/round_button"
+        android:fontFamily="casual"
+        android:fontFeatureSettings="@string/material_motion_easing_standard"
+        android:gravity="center_vertical|center_horizontal"
+        android:onClick="saveIngredient"
+        android:text="Save"
+        android:textColor="#fff"
+        android:textSize="20dp" />
 
     <Button
         android:id="@+id/ingredientFinishButton"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Finish"
+        android:layout_height="78dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
         android:layout_gravity="center"
         android:layout_marginTop="35dp"
-        android:textColor="@color/black"
+        android:layout_marginEnd="93dp"
+        android:layout_marginBottom="165dp"
+        android:background="@drawable/round_button"
+        android:fontFamily="casual"
+        android:fontFeatureSettings="@string/material_motion_easing_standard"
+        android:gravity="center_vertical|center_horizontal"
+        android:onClick="closeIngredientPage"
+        android:text="Finish"
+        android:textColor="#fff"
+        android:textSize="20dp" />
+
+    <Spinner
+        android:id="@+id/foodGroupSpinner"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_gravity="center"
+        android:layout_marginEnd="112dp"
+        android:layout_marginBottom="374dp"
+        android:textAlignment="center"
+        android:backgroundTint="@color/white"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_gravity="center"
+        android:layout_marginEnd="168dp"
+        android:layout_marginBottom="369dp"
+        android:fontFamily="casual"
+        android:text="Enter food group"
+        android:textAlignment="center"
         android:textSize="20sp"
-        android:onClick="closeIngredientPage"/>
+        android:textColor="@color/white"/>
 
 
-</LinearLayout>
+</RelativeLayout>

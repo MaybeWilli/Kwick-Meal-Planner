@@ -4,21 +4,36 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".MainActivity"
+    android:background="@drawable/gradient_list"
+    android:id="@+id/mainLayout">
 
     <TextView
         android:id="@+id/nameTV"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
         android:text="Meal Text"
-        android:layout_marginTop="10dp"/>
+        android:fontFamily="casual"
+        android:textColor="@color/white"
+        android:textStyle="bold"/>
 
     <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="70sp"
         android:id="@+id/deleteButton"
-        android:text="Delete"/>
+        android:layout_width="50dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginLeft="70sp"
+        android:layout_marginEnd="297dp"
+        android:layout_marginBottom="683dp"
+        android:background="@drawable/round_button"
+        android:fontFamily="casual"
+        android:fontFeatureSettings="@string/material_motion_easing_standard"
+        android:gravity="center_vertical|center_horizontal"
+        android:text="Delete"
+        android:textColor="#fff"
+        android:textSize="10dp" />
 
 
 </RelativeLayout>
