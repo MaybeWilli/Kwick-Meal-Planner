@@ -45,9 +45,9 @@ public class MainActivity extends AppCompatActivity {
             fetchData.thread.start();
         }
         isFirstOpen = false;
-        mediaPlayer = MediaPlayer.create(this, R.raw.il_vento_doro);
-        mediaPlayer.setLooping(true);
-        mediaPlayer.start();
+        //mediaPlayer = MediaPlayer.create(this, R.raw.il_vento_doro);
+        //mediaPlayer.setLooping(true);
+        //mediaPlayer.start();
         //mealDao.insertOneMeal(new SavedMeal());
         //List<SavedMeal> savedMeals = mealDao.getAll();
         //SavedMeal[] savedMeals = mealDao.getAll();

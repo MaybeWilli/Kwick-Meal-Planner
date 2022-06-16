@@ -33,6 +33,7 @@ public class EditMealUI extends AppCompatActivity {
     private int currentIngredient = 0;
     private String oldName;
     private String oldIngredientStr;
+    private boolean shouldSetSpinner = true;
 
 
     @RequiresApi(api = Build.VERSION_CODES.O)
@@ -68,8 +69,11 @@ public class EditMealUI extends AppCompatActivity {
         currentIngredientSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                currentIngredient = i;
-                setItems(i);
+                if (shouldSetSpinner)
+                {
+                    currentIngredient = i;
+                    setItems(i);
+                }
             }
 
             @Override
@@ -120,8 +124,43 @@ public class EditMealUI extends AppCompatActivity {
         //MealManager.addMeal(MealInputPage.mealName, ingredientArrayList, totalCalories, foodGroupsArrayList, servingsArrayList);
         Log.e("ingredient", "I am also here!");
 
+    }
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    public void addNewIngredient(View view)
+    {
+        shouldSetSpinner = false;
+        spinnerIngredientList.add("new ingredient");
+        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, spinnerIngredientList);
+        arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        currentIngredientSpinner.setAdapter(arrayAdapter);
+        /*currentIngredientSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                if (shouldSetSpinner)
+                {
+                    currentIngredient = i;
+                    setItems(i);
+                }
+            }
 
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+                //I have no idea
+            }
+        });//*/
+
+        newMeal.ingredients.add("new ingredient");
+        for(int i = 0; i < newMeal.ingredients.size(); i++)
+        {
+            Log.e("editingMeal", newMeal.ingredients.get(i));
+        }
+        newMeal.caloriesList.add(0f);
+        newMeal.servings.add(0f);
+        newMeal.groups.add("Other");
+        currentIngredient = spinnerIngredientList.size()-1;
+        setItems(currentIngredient);
+        shouldSetSpinner = true;
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
@@ -159,15 +198,24 @@ public class EditMealUI extends AppCompatActivity {
     @RequiresApi(api = Build.VERSION_CODES.O)
     public void removeIngredient(View view)
     {
+        Log.e("editingmeal", "hello");
         spinnerIngredientList.remove(currentIngredient);
+        Log.e("editingmeal", "hello1");
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, spinnerIngredientList);
+        Log.e("editingmeal", "hello2");
         arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        Log.e("editingmeal", "hello3");
         currentIngredientSpinner.setAdapter(arrayAdapter);
 
+        for(int i = 0; i < newMeal.ingredients.size(); i++)
+        {
+            Log.e("editingMeal", "Why "+newMeal.ingredients.get(i));
+        }
         newMeal.ingredients.remove(currentIngredient);
         newMeal.caloriesList.remove(currentIngredient);
         newMeal.servings.remove(currentIngredient);
         newMeal.groups.remove(currentIngredient);
+        currentIngredient = 0;
         setItems(currentIngredient);
     }
 
@@ -187,12 +235,12 @@ public class EditMealUI extends AppCompatActivity {
         currentIngredientSpinner.setSelection(0);
         currentIngredient = 0;
 
-        setItems(0);
+        setDefaultItems(0);
         mealName.setText(MealManager.meals.get(EditMealPage.currentItem).name);
         //ingredientCaloriesET.setText(Float.parseFloat(MealManager.meals.get(EditMealPage.currentItem).calories.get(currentIngredient)));
     }
 
-    private void setItems(int item)
+    private void setDefaultItems(int item)
     {
         //ingredient name
         ingredientNameET.setText(MealManager.meals.get(EditMealPage.currentItem).ingredients.get(item));
@@ -224,5 +272,43 @@ public class EditMealUI extends AppCompatActivity {
 
         //servings
         ingredientServingsET.setText(MealManager.meals.get(EditMealPage.currentItem).servings.get(item).toString());
+    }
+
+    private void setItems(int item)
+    {
+        for(int i = 0; i < newMeal.ingredients.size(); i++)
+        {
+            Log.e("editingMeal", "Whys "+newMeal.ingredients.get(i)+" "+item);
+        }
+        //ingredient name
+        ingredientNameET.setText(newMeal.ingredients.get(item));
+
+        //calories
+        ingredientCaloriesET.setText(newMeal.caloriesList.get(item).toString());
+
+        //food group
+        if (newMeal.groups.get(item).equals("Vegetables"))
+        {
+            foodGroupSpinner.setSelection(1);
+        }
+        else if (newMeal.groups.get(item).equals("Grains"))
+        {
+            foodGroupSpinner.setSelection(2);
+        }
+        else if (newMeal.groups.get(item).equals("Dairy"))
+        {
+            foodGroupSpinner.setSelection(3);
+        }
+        else if (newMeal.groups.get(item).equals("Meat"))
+        {
+            foodGroupSpinner.setSelection(4);
+        }
+        else if (newMeal.groups.get(item).equals("Other"))
+        {
+            foodGroupSpinner.setSelection(0);
+        }
+
+        //servings
+        ingredientServingsET.setText(newMeal.servings.get(item).toString());
     }
 }

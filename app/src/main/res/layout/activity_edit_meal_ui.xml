@@ -168,6 +168,17 @@
         android:onClick="removeIngredient"/>
 
     <Button
+        android:id="@+id/ingredientAddButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Delete Ingredient"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        android:onClick="addNewIngredient"/>
+
+    <Button
         android:id="@+id/ingredientFinishButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

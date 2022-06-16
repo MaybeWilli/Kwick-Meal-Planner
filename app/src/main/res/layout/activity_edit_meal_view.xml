@@ -8,7 +8,7 @@
 
     <TextView
         android:id="@+id/nameTV"
-        android:layout_width="wrap_content"
+        android:layout_width="100dp"
         android:layout_height="wrap_content"
         android:text="Meal Text"
         android:layout_marginTop="10dp"/>
@@ -16,14 +16,14 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="70sp"
+        android:layout_marginLeft="110sp"
         android:id="@+id/editButton"
         android:text="Edit"/>
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="170sp"
+        android:layout_marginLeft="200sp"
         android:id="@+id/deleteButton"
         android:text="Delete"/>
 
