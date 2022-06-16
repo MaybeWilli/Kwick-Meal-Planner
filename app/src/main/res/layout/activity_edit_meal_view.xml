@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity"
+    android:background="@drawable/gradient_list"
+    android:id="@+id/mainLayout">
+
+    <TextView
+        android:id="@+id/nameTV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:fontFamily="casual"
+        android:text="Meal Text"
+        android:textColor="@color/white"
+        android:textStyle="bold"/>
+
+    <Button
+        android:id="@+id/editButton"
+        android:layout_width="48dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginLeft="70sp"
+        android:layout_marginBottom="683dp"
+        android:background="@drawable/round_button"
+        android:fontFamily="casual"
+        android:fontFeatureSettings="@string/material_motion_easing_standard"
+        android:gravity="center_vertical|center_horizontal"
+        android:text="Edit"
+        android:textColor="#fff"
+        android:textSize="10dp" />
+
+    <Button
+        android:id="@+id/deleteButton"
+        android:layout_width="52dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginLeft="170sp"
+        android:layout_marginEnd="233dp"
+        android:layout_marginBottom="684dp"
+        android:background="@drawable/round_button"
+        android:fontFamily="casual"
+        android:fontFeatureSettings="@string/material_motion_easing_standard"
+        android:gravity="center_vertical|center_horizontal"
+        android:text="Delete"
+        android:textColor="#fff"
+        android:textSize="10dp" />
+
+
+</RelativeLayout>
