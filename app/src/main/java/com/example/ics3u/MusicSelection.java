@@ -1,3 +1,7 @@
+/*
+* This java page controls the music selection page. Every button has an
+* onClick method that sets the MainActivity's mediaPlayer to a new song
+ */
 package com.example.ics3u;
 
 import android.content.Context;
@@ -16,6 +20,8 @@ public class MusicSelection extends AppCompatActivity {
     Button button4;
     Button button5;
     public static Context context;
+
+    //setup the page and add onClick functions to the relevant buttons
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -65,6 +71,7 @@ public class MusicSelection extends AppCompatActivity {
             }
         });
 
+        //add onClick method to stop the mediaPlayer
         button5 = (Button) findViewById(R.id.pauseButton);
         button5.setOnClickListener(new View.OnClickListener() {
             @Override

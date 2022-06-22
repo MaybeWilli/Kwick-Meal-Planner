@@ -1,3 +1,6 @@
+/*
+* Defines a database object with a mealDao.
+ */
 package com.example.ics3u;
 
 import androidx.room.Database;
