@@ -1,3 +1,9 @@
+/*
+* This java file serves as the main interface for interacting with any form of saved meal
+* that every file can look into. It also doubles as the database interface, since our database
+* model needs one file that interacts with database related affairs. The functionaltiy includes
+* adding, deleting, updating, and fetching from both the meals and the planned meals.
+ */
 package com.example.ics3u;
 
 import android.os.Build;
@@ -17,37 +23,18 @@ public class MealManager {
     public static List<SavedMeal> savedMeals;
     public static List<SavedMeal> savedPlannedMeals;
 
-    /*public static void addMeal(String name) //look, I'll add some more overloads later, ok?
-    {
-        Meal newMeal = new Meal(name, new ArrayList<String>());
-        meals.add(newMeal);
-        InsertSavedMeal insertSavedMeal = new InsertSavedMeal(name, "", 0);
-        insertSavedMeal.thread.start();
-        PrintElements();
-    }*/
-
-    @RequiresApi(api = Build.VERSION_CODES.O)
-    public static void addMeal(String name, ArrayList<String> ingredients) //look, I'll add some more overloads later, ok?
-    {
-        Meal newMeal = new Meal(name, ingredients);
-        meals.add(newMeal);
-        String ingredientStr = String.join(",", ingredients);
-        Log.e("hmm", ingredientStr);
-        //InsertSavedMeal insertSavedMeal = new InsertSavedMeal(name, ingredientStr, 0);
-        //insertSavedMeal.thread.start();
-        PrintElements();
-    }
-
+    //save a new meal to both the ArrayList and the database
     @RequiresApi(api = Build.VERSION_CODES.O)
     public static void addMeal(String name, ArrayList<String> ingredients, float calories, ArrayList<String> groups, ArrayList<Float> servings, ArrayList<Float> calList, float totalServings)
     {
+        //add tp ArrayList
         Meal newMeal = new Meal(name, new ArrayList<String>(), calories, groups, servings, calList, totalServings);
         newMeal.ingredients.addAll(ingredients);
         meals.add(newMeal);
 
+        //convert to proper format and save into database
         //convert ingredient to string
         String ingredientStr = String.join(",", ingredients);
-        Log.e("mealmanager", ingredientStr);
 
         //convert food groups to string
         String groupsStr = String.join(",", groups);
@@ -68,18 +55,19 @@ public class MealManager {
         }
         String calStr = String.join(",", calStrList);
 
+        //run thread to save into database
         InsertSavedMeal insertSavedMeal = new InsertSavedMeal(name, ingredientStr, calories, servingsStr, groupsStr, calStr, totalServings);
         insertSavedMeal.thread.start();
-        PrintElements();
     }
 
+    //add a new planned meal to the ArrayList and database
     @RequiresApi(api = Build.VERSION_CODES.O)
     public static void addPlannedMeal(Meal meal, String date, float servings)
     {
+        //add to the ArrayList
         MealManager.plannedMeals.add(new PlannedMeal(meal, date, servings));
-        PrintElements();
-        Log.e("hmm", "Not here either!");
 
+        //convert everything to String or float, and save into database
         //convert ingredient to string
         String ingredientStr = String.join(",", meal.ingredients);
         Log.e("mealmanager", ingredientStr);
@@ -103,23 +91,25 @@ public class MealManager {
         }
         String calStr = String.join(",", calList);
 
+        //run background thread to save data into planned meal database
         InsertSavedPlannedMeal insertSavedPlannedMeal = new InsertSavedPlannedMeal(meal.name, ingredientStr, date, meal.calories, servings, servingsStr, groupsStr, calStr, meal.totalServings);
-        //String name, String ingredients, String date, float calories, float servings, String servingsStr, String groupStr, String calorieStr, float totalServings)
-        //(String name, String date, float calories, float servings, String servingsStr, String groupStr, String calorieStr, float totalServings)
         insertSavedPlannedMeal.thread.start();
     }
 
+    //prints out every item in the meals ArrayList (used for debugging purposes)
     private static void PrintElements()
     {
         for (int i = 0; i < meals.size(); i++)
         {
-            //Log.e("hmm", meals.get(i).name);
+            Log.e("hmm", meals.get(i).name);
         }
     }
 
+    //delete a meal from the ArrayList and Database based on the position in the ArrayList
     @RequiresApi(api = Build.VERSION_CODES.O)
     public static void deleteMeal(int mealPos)
     {
+        //remove from ArrayList
         Meal meal = MealManager.meals.get(mealPos);
         MealManager.meals.remove(mealPos);
 
@@ -127,8 +117,10 @@ public class MealManager {
         String ingredientStr = String.join(",", meal.ingredients);
         Log.e("mealmanager", ingredientStr);
 
+        //find the id of the SavedMeal in the database
         int id = 0;
         for (int i = 0; i < savedMeals.size(); i++) {
+            //compare meals until the right one is found
             if (meal.name.equals(savedMeals.get(i).name) && ingredientStr.equals(savedMeals.get(i).ingredients)) {
                 id = savedMeals.get(i).uid;
                 break;
@@ -144,8 +136,7 @@ public class MealManager {
                 i = 0;
             }
         }
-        Log.e("threadTesting", "I am here!");
-        //delete from savedMealDatabase
+        //start background thread to delete from savedMealDatabase
         DeleteSavedMeal deleteSavedMeal = new DeleteSavedMeal(id, meal.name);
         deleteSavedMeal.thread.start();
     }

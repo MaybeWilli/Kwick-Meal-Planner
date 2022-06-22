@@ -1,3 +1,9 @@
+/*
+* Contains the functions called by the four buttons on the activity_edit_meal_ui xml page.
+* Calls the relevant functions from the MealManager whenever the buttons are pressed.
+* Automatically fills in the editTexts with the data the user last used, so that they can
+* see what they inputed last time.
+ */
 package com.example.ics3u;
 
 import android.os.Build;
@@ -36,12 +42,14 @@ public class EditMealUI extends AppCompatActivity {
     private boolean shouldSetSpinner = true;
 
 
+    //Set the editTexts and spinners with the values the user inputed last time
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_meal_ui);
 
+        //get variables
         foodGroupSpinner = findViewById(R.id.foodGroupSpinner);
         ingredientNameET = findViewById(R.id.ingredientET);
         ingredientServingsET = findViewById(R.id.servingsET);
@@ -52,6 +60,7 @@ public class EditMealUI extends AppCompatActivity {
         oldName = MealManager.meals.get(EditMealPage.currentItem).name;
         oldIngredientStr = String.join(",", MealManager.meals.get(EditMealPage.currentItem).ingredients);
 
+        //add items to the food groups spinner
         ArrayList<String> foodGroups = new ArrayList<String>();
         foodGroups.add("Other");
         foodGroups.add("Vegetables");
@@ -63,9 +72,14 @@ public class EditMealUI extends AppCompatActivity {
         arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         foodGroupSpinner.setAdapter(arrayAdapter);
 
+        //add items to the spinner that lets the user choose what ingredient to edit
         generateIngredientSpinner();
+
+        //fill the editTexts with information that the user used last time
         setDefaultItems();
 
+        //make the editTexts update with new information whenever the user selects a new
+        //ingredient from the dropdown spinner
         currentIngredientSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
@@ -78,37 +92,15 @@ public class EditMealUI extends AppCompatActivity {
 
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
-                //I have no idea
+                //Nothing happens
             }
         });
     }
 
+    //edit the meal's data in the arrayList.
     @RequiresApi(api = Build.VERSION_CODES.O)
     public void editIngredient(View view)
     {
-        Log.e("ingredient", "I am here!");
-        /*if (ingredientNameET.getText().toString().equals(""))
-        {
-            //return a meal with no ingredients
-            float calories = Float.parseFloat(ingredientCaloriesET.getText().toString());
-            float servings = Float.parseFloat(ingredientCaloriesET.getText().toString());
-            MealManager.addMeal(MealInputPage.mealName, new ArrayList<String>(), calories, new ArrayList<String>(), new ArrayList<Float>());
-        }*/
-        //calories
-        /*totalCalories += Float.parseFloat(ingredientCaloriesET.getText().toString()) * Float.parseFloat(ingredientServingsET.getText().toString());
-        Log.e("ingredient", "I am here1!");
-
-        //ingredient name
-        ingredientArrayList.add(ingredientNameET.getText().toString());
-        Log.e("ingredient", "I am here2!");
-        //food groups
-        foodGroupsArrayList.add(foodGroupSpinner.getSelectedItem().toString());
-        Log.e("ingredient", "I am here3!");
-
-        //servings
-        servingsArrayList.add(Float.parseFloat(ingredientServingsET.getText().toString()));
-        Log.e("ingredient", "wow");*/
-
         //ingredient name
         newMeal.ingredients.set(currentIngredient, ingredientNameET.getText().toString());
 
@@ -120,36 +112,21 @@ public class EditMealUI extends AppCompatActivity {
 
         //groups
         newMeal.groups.set(currentIngredient, foodGroupSpinner.getSelectedItem().toString());
-
-        //MealManager.addMeal(MealInputPage.mealName, ingredientArrayList, totalCalories, foodGroupsArrayList, servingsArrayList);
-        Log.e("ingredient", "I am also here!");
-
     }
 
+    //create a new ingredient, pass it into the spinner, and give it default values (0 and "other" for everything")
+    //it's name is "new ingredient" by default
     @RequiresApi(api = Build.VERSION_CODES.O)
     public void addNewIngredient(View view)
     {
+        //reset the ingredient selection spinner
         shouldSetSpinner = false;
         spinnerIngredientList.add("new ingredient");
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, spinnerIngredientList);
         arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         currentIngredientSpinner.setAdapter(arrayAdapter);
-        /*currentIngredientSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                if (shouldSetSpinner)
-                {
-                    currentIngredient = i;
-                    setItems(i);
-                }
-            }
 
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-                //I have no idea
-            }
-        });//*/
-
+        //set the default values for the new ingredient
         newMeal.ingredients.add("new ingredient");
         for(int i = 0; i < newMeal.ingredients.size(); i++)
         {
@@ -163,10 +140,12 @@ public class EditMealUI extends AppCompatActivity {
         shouldSetSpinner = true;
     }
 
+    //pass all the information into the MealManager, so the changes are actually saved
+    //in the database for next time the app is opened
     @RequiresApi(api = Build.VERSION_CODES.O)
     public void saveChanges(View view)
     {
-        //update the changes just in case
+        //fetch the changes in the current EditTexts
         //ingredient name
         newMeal.ingredients.set(currentIngredient, ingredientNameET.getText().toString());
 
@@ -179,6 +158,7 @@ public class EditMealUI extends AppCompatActivity {
         //groups
         newMeal.groups.set(currentIngredient, foodGroupSpinner.getSelectedItem().toString());
 
+        //update the total servings and total calories
         float totalServings = 0;
         for (int i = 0; i < newMeal.servings.size(); i++)
         {
@@ -187,38 +167,38 @@ public class EditMealUI extends AppCompatActivity {
         }
         newMeal.totalServings = totalServings;
 
+        //update the name
         newMeal.name = mealName.getText().toString();
 
+        //pass the information into the MealManager to update the ArrayList and the database
         MealManager.updateMeal(newMeal, oldName, oldIngredientStr);
 
-        //MealManager.addMeal(MealInputPage.mealName, ingredientArrayList, totalCalories, foodGroupsArrayList, servingsArrayList);
+        //close the UI page
         finish();
     }
 
+    //removes an ingredient from the meal
     @RequiresApi(api = Build.VERSION_CODES.O)
     public void removeIngredient(View view)
     {
-        Log.e("editingmeal", "hello");
+        //remove the ingredient from the ingredients spinner
         spinnerIngredientList.remove(currentIngredient);
-        Log.e("editingmeal", "hello1");
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, spinnerIngredientList);
-        Log.e("editingmeal", "hello2");
         arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        Log.e("editingmeal", "hello3");
         currentIngredientSpinner.setAdapter(arrayAdapter);
 
-        for(int i = 0; i < newMeal.ingredients.size(); i++)
-        {
-            Log.e("editingMeal", "Why "+newMeal.ingredients.get(i));
-        }
+        //remove the ingredient from all the arrayLists
         newMeal.ingredients.remove(currentIngredient);
         newMeal.caloriesList.remove(currentIngredient);
         newMeal.servings.remove(currentIngredient);
         newMeal.groups.remove(currentIngredient);
         currentIngredient = 0;
+
+        //set the spinner to a new item
         setItems(currentIngredient);
     }
 
+    //add all the ingredients to the spinner
     private void generateIngredientSpinner()
     {
         for (int i = 0; i < MealManager.meals.get(EditMealPage.currentItem).ingredients.size(); i++)
@@ -230,6 +210,7 @@ public class EditMealUI extends AppCompatActivity {
         currentIngredientSpinner.setAdapter(arrayAdapter);
     }
 
+    //select an item in the spinner, and fill in all the editTexts with ingredient 0's data
     private void setDefaultItems()
     {
         currentIngredientSpinner.setSelection(0);
@@ -237,9 +218,9 @@ public class EditMealUI extends AppCompatActivity {
 
         setDefaultItems(0);
         mealName.setText(MealManager.meals.get(EditMealPage.currentItem).name);
-        //ingredientCaloriesET.setText(Float.parseFloat(MealManager.meals.get(EditMealPage.currentItem).calories.get(currentIngredient)));
     }
 
+    //fill in the editTexts for a specified ingredient, but using the MealManager values
     private void setDefaultItems(int item)
     {
         //ingredient name
@@ -274,12 +255,9 @@ public class EditMealUI extends AppCompatActivity {
         ingredientServingsET.setText(MealManager.meals.get(EditMealPage.currentItem).servings.get(item).toString());
     }
 
+    //set editText values from the newMeal meal instead of the MealManager
     private void setItems(int item)
     {
-        for(int i = 0; i < newMeal.ingredients.size(); i++)
-        {
-            Log.e("editingMeal", "Whys "+newMeal.ingredients.get(i)+" "+item);
-        }
         //ingredient name
         ingredientNameET.setText(newMeal.ingredients.get(item));
 

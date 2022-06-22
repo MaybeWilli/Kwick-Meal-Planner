@@ -1,8 +1,14 @@
+/*
+* Displays all of the meals that the user has inputed, along with
+* how many servings of each food group are in one serving of total meal.
+* Displays how many calories are in one serving of total meal.
+* Also contains code for the search bar that filters down the meals
+* using a keyword.
+ */
 package com.example.ics3u;
 
 import android.os.Bundle;
 import android.text.method.ScrollingMovementMethod;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -17,19 +23,24 @@ public class DisplayMealPage extends AppCompatActivity {
     private EditText searchET;
     private Button searchButton;
     private TextView mealsTV;
+
+    //Set the default text, and add the onClick method to the search button
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_display_meal_page);
 
+        //set variables
         searchET = findViewById(R.id.searchMealET);
         searchButton = findViewById(R.id.searchMealButton);
         mealsTV = findViewById(R.id.mealsTV);
 
-        //Log.e("hmm", "Why");
+        //make the textView scroll, and set the default text
         mealsTV.setText(generateMealString());
         mealsTV.setMovementMethod(new ScrollingMovementMethod());
 
+        //make an onClick function that generates the meals that contain the "searchterm"
+        //inputed in the search bar edit text
         searchButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -39,10 +50,12 @@ public class DisplayMealPage extends AppCompatActivity {
         });
     }
 
+    //return a string containing the names of all the meals, and the calorie and food group information
     private String generateMealString()
     {
         String value = "";
 
+        //scroll through the meal list and add the information for each meal
         for (int i = 0; i < MealManager.meals.size(); i++)
         {
             value += MealManager.meals.get(i).name;
@@ -52,13 +65,11 @@ public class DisplayMealPage extends AppCompatActivity {
             float meat = 0;
             float other = 0;
             Float totalServings = 0f;
-            //Log.e("DisplayMeal", "Ingredient: "+MealManager.meals.get(i).ingredients.get(0));
             for (int j = 0; j < MealManager.meals.get(i).ingredients.size(); j++)
             {
                 value += "\n    -" + MealManager.meals.get(i).ingredients.get(j);
                 totalServings += MealManager.meals.get(i).servings.get(j);
             }
-            Log.e("servingsTesting", totalServings.toString());
             for (int j = 0; j < MealManager.meals.get(i).groups.size(); j++)
             {
                 if (MealManager.meals.get(i).groups.get(j).equals("Vegetables"))
@@ -82,6 +93,8 @@ public class DisplayMealPage extends AppCompatActivity {
                     other += MealManager.meals.get(i).servings.get(j);
                 }
             }
+
+            //summarize the information by adding it to the string
             value += "\nCalories per serving: "+MealManager.meals.get(i).calories/totalServings;
             value += "\nVegetable servings per serving: "+(Math.round(vegetables/totalServings*100.0)/100.0);
             value += "\nGrain servings per serving: "+(Math.round(grains/totalServings*100.0)/100.0);
@@ -93,6 +106,8 @@ public class DisplayMealPage extends AppCompatActivity {
         return value;
     }
 
+    //overload method for generateMealString. Does the same thing, but the meal must contain the searchterm
+    //in order to be included
     private String generateMealString(String searchTerm)
     {
         String value = "";
@@ -108,12 +123,10 @@ public class DisplayMealPage extends AppCompatActivity {
                 float meat = 0;
                 float other = 0;
                 Float totalServings = 0f;
-                //Log.e("DisplayMeal", "Ingredient: "+MealManager.meals.get(i).ingredients.get(0));
                 for (int j = 0; j < MealManager.meals.get(i).ingredients.size(); j++) {
                     value += "\n    -" + MealManager.meals.get(i).ingredients.get(j);
                     totalServings += MealManager.meals.get(i).servings.get(j);
                 }
-                Log.e("servingsTesting", totalServings.toString());
                 for (int j = 0; j < MealManager.meals.get(i).groups.size(); j++) {
                     if (MealManager.meals.get(i).groups.get(j).equals("Vegetables")) {
                         vegetables += MealManager.meals.get(i).servings.get(j);
@@ -138,10 +151,4 @@ public class DisplayMealPage extends AppCompatActivity {
 
         return value;
     }
-
-    /*@RequiresApi(api = Build.VERSION_CODES.O)
-    public void searchMeal()
-    {
-
-    }*/
 }
