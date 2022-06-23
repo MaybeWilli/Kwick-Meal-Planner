@@ -1,3 +1,7 @@
+/*
+* This Java class is the custom data class used to save all of the meals
+* the user inputs.
+ */
 package com.example.ics3u;
 
 import java.util.ArrayList;
@@ -9,11 +13,12 @@ public class Meal {
     public ArrayList<String> ingredients; //ingredient list, e.x: [lettuce, chicken, fruit]
     public ArrayList<String> groups; //food groups, e.x: [vegetable, vegetable, dairy]
     public ArrayList<Float> servings; //servings for each of the ingredients, e.x: [1, 2, 3]
-    public ArrayList<Float> caloriesList;
-    public float totalServings;
-    public float calories;
+    public ArrayList<Float> caloriesList; //calories for each of the ingredients, e.x: [10, 25, 15]
+    public float totalServings; //total servings for the meal inputed
+    public float calories; //total calories for the meal inputed
 
-    public Meal() //dunno why you'd ever use this...
+    //constructors
+    public Meal()
     {
         name = "Empty Meal";
     }

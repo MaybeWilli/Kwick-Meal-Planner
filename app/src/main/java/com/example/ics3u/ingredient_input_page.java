@@ -1,3 +1,8 @@
+/*
+* This java file is for the page that opens when the user enters a meal name in the
+* MealInputPage and presses enter. It saves the user's input, and sends over the
+* data to the MealManager, for it to save into an arrayList and database.
+ */
 package com.example.ics3u;
 
 import android.os.Build;
@@ -26,6 +31,7 @@ public class ingredient_input_page extends AppCompatActivity {
     private ArrayList<Float> servingsArrayList = new ArrayList<Float>();
     private ArrayList<Float> caloriesList = new ArrayList<Float>();
 
+    //set up the page
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,27 +54,18 @@ public class ingredient_input_page extends AppCompatActivity {
         foodGroupSpinner.setAdapter(arrayAdapter);
     }
 
+    //add ingredient data to arraylists
     @RequiresApi(api = Build.VERSION_CODES.O)
     public void saveIngredient(View view)
     {
-        Log.e("ingredient", "I am here!");
-        if (ingredientNameET.getText().toString().equals(""))
-        {
-            //return a meal with no ingredients
-            float calories = Float.parseFloat(ingredientCaloriesET.getText().toString());
-            float servings = Float.parseFloat(ingredientCaloriesET.getText().toString());
-            MealManager.addMeal(MealInputPage.mealName, new ArrayList<String>(), calories, new ArrayList<String>(), new ArrayList<Float>(), new ArrayList<Float>(), servings);
-        }
         //calories
         totalCalories += Float.parseFloat(ingredientCaloriesET.getText().toString()) * Float.parseFloat(ingredientServingsET.getText().toString());
-        Log.e("ingredient", "I am here1!");
 
         //ingredient name
         ingredientArrayList.add(ingredientNameET.getText().toString());
-        Log.e("ingredient", "I am here2!");
+
         //food groups
         foodGroupsArrayList.add(foodGroupSpinner.getSelectedItem().toString());
-        Log.e("ingredient", "I am here3!");
 
         //servings
         servingsArrayList.add(Float.parseFloat(ingredientServingsET.getText().toString()));
@@ -77,31 +74,26 @@ public class ingredient_input_page extends AppCompatActivity {
         //calorie list
         caloriesList.add(Float.parseFloat(ingredientCaloriesET.getText().toString()));
 
-        //MealManager.addMeal(MealInputPage.mealName, ingredientArrayList, totalCalories, foodGroupsArrayList, servingsArrayList);
+        //clear out the editTexts
         ingredientCaloriesET.getText().clear();
         ingredientServingsET.getText().clear();
         ingredientNameET.getText().clear();
-        Log.e("ingredient", "I am also here!");
-
-
-
     }
 
+    //send data to MealManager and close page
     @RequiresApi(api = Build.VERSION_CODES.O)
     public void closeIngredientPage(View view)
     {
-        Log.e("hmm", "This is extremely awkward");
+        //get total servings
         float totalServings = 0;
         for (int i = 0; i < servingsArrayList.size(); i++)
         {
             totalServings += servingsArrayList.get(i);
         }
-        /*for (int i = 0; i < servingsArrayList.size(); i++)
-        {
-            servingsArrayList.set(i, servingsArrayList.get(i)/totalServings);
-        }*/
         totalCalories = totalCalories/totalServings;
+
+        //send to MealManager
         MealManager.addMeal(MealInputPage.mealName, ingredientArrayList, totalCalories, foodGroupsArrayList, servingsArrayList, caloriesList, totalServings);
-        finish();
+        finish(); //close page
     }
 }

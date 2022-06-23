@@ -1,6 +1,11 @@
+/*
+* This java class partially deals with the RecyclerView, and
+* creates the views attached to the calendar page. It's also
+* partially responsible for the onClick function each of
+* the calendar cells have.
+ */
 package com.example.ics3u;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,6 +24,7 @@ public class CalendarAdapter extends RecyclerView.Adapter<CalendarViewHolder>{
         this.onItemListener = onItemListener;
     }
 
+    //override of an abstract function. Shrinks itself as soon as it is created
     @NonNull
     @Override
     public CalendarViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -29,6 +35,7 @@ public class CalendarAdapter extends RecyclerView.Adapter<CalendarViewHolder>{
         return new CalendarViewHolder(view, onItemListener);
     }
 
+    //another override. Adds the number to the cell.
     @Override
     public void onBindViewHolder(@NonNull CalendarViewHolder holder, int position) {
         holder.dayOfMonth.setText(daysOfMonth.get(position));

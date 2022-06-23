@@ -1,7 +1,9 @@
+/*
+* This file actually is never used. Whoops.
+ */
 package com.example.ics3u;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -16,6 +18,5 @@ public class EditMealView extends AppCompatActivity {
         setContentView(R.layout.activity_edit_meal_view);
         nameTV = findViewById(R.id.nameTV);
         nameTV.setText("Foods!");
-        Log.e("hmm", "bruuuh!");
     }
 }

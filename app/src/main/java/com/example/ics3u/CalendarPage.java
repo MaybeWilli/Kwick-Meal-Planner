@@ -1,3 +1,9 @@
+/*
+* The file for the actual calendar page itself. Sets all the
+* views, contains definitions for setting the day of the month,
+* and the functions that allow the user to navigate between
+* the months. Also contains the function for the cell's onClick method
+ */
 package com.example.ics3u;
 
 import android.content.Intent;
@@ -25,6 +31,7 @@ public class CalendarPage extends AppCompatActivity implements CalendarAdapter.O
     public static LocalDate selectedDate;
     public static String currentDate;
 
+    //gets the variable definitions, sets the cells
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,12 +44,14 @@ public class CalendarPage extends AppCompatActivity implements CalendarAdapter.O
 
     }
 
+    //sets variables
     private void initWidgets()
     {
         calendarRecyclerView = findViewById(R.id.calendarRecyclerView);
         monthYearText = findViewById(R.id.monthYearText);
     }
 
+    //sets the new month depending on the date
     @RequiresApi(api = Build.VERSION_CODES.O)
     private void setMonthView()
     {
@@ -55,6 +64,7 @@ public class CalendarPage extends AppCompatActivity implements CalendarAdapter.O
         calendarRecyclerView.setAdapter(calendarAdapter);
     }
 
+    //formats the date as a string using DataTimeFormatter
     @RequiresApi(api = Build.VERSION_CODES.O)
     private String monthYearFromDate(LocalDate date)
     {
@@ -62,6 +72,7 @@ public class CalendarPage extends AppCompatActivity implements CalendarAdapter.O
         return date.format(formatter);
     }
 
+    //returns an array for which days need to be included in the cell
     @RequiresApi(api = Build.VERSION_CODES.O)
     private ArrayList<String> daysInMonthArray(LocalDate date)
     {
@@ -85,6 +96,7 @@ public class CalendarPage extends AppCompatActivity implements CalendarAdapter.O
         return daysInMonthArray;
     }
 
+    //go back a month
     @RequiresApi(api = Build.VERSION_CODES.O)
     public void previousMonthAction(View view)
     {
@@ -92,6 +104,7 @@ public class CalendarPage extends AppCompatActivity implements CalendarAdapter.O
         setMonthView();
     }
 
+    //go forwards a month
     @RequiresApi(api = Build.VERSION_CODES.O)
     public void nextMonthAction(View view)
     {
@@ -99,6 +112,8 @@ public class CalendarPage extends AppCompatActivity implements CalendarAdapter.O
         setMonthView();
     }
 
+    //Open a new activity when clicked. Sets static "currentDate" to the current date
+    //so that the calendar_input_meal knows what day it is.
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     public void onItemClick(int position, String dayText) {

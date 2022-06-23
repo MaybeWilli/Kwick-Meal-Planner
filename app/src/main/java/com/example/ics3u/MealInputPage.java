@@ -1,3 +1,8 @@
+/*
+* This java file controls the first half of the meal inputing process.
+* All it does is record the meal's name, and open up the ingredient
+* input page (activity_ingredient_input_page)
+ */
 package com.example.ics3u;
 
 import android.content.Intent;
@@ -21,32 +26,23 @@ public class MealInputPage extends AppCompatActivity {
     private ArrayList<String> ingredients = new ArrayList<>();
     public static String mealName = "";
 
-    //private ArrayList<String> arrayList = new ArrayList<>();
-
+    //set variables and setup page
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_meal_input_page);
         mealET = findViewById(R.id.mealET);
         mealInputSpinner = findViewById(R.id.mealInputSpinner);
-
-
-        /*for (int i = 0; i < MealManager.meals.length; i++)
-        {
-            arrayList.add(MealManager.meals[i].name);
-        }
-        /*/
-
-        //arrayList.add("Hello");
-        //ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, arrayList);
     }
 
+    //close the page
     @RequiresApi(api = Build.VERSION_CODES.O)
     public void closeInputPage(View view)
     {
         finish();
     }
 
+    //record the meal's name, and open the activity_ingredient_input_page
     @RequiresApi(api = Build.VERSION_CODES.O)
     public void addMealFromET(View view)
     {
@@ -55,16 +51,4 @@ public class MealInputPage extends AppCompatActivity {
         startActivity(intent);
         finish();
     }
-
-    /*@RequiresApi(api = Build.VERSION_CODES.O)
-    public void addIngredientFromET(View view)
-    {
-        Log.e("addIngredient", "Pourquoi?");
-        String ingredient = ingredientET.getText().toString();
-        Log.e("addIngredient", "Why? "+ingredient);
-        ingredients.add(ingredient);
-        Log.e("addIngredient", "Nani?");
-        ingredientET.getText().clear();
-        Log.e("addIngredient", "Impossible!?");
-    }*/
 }

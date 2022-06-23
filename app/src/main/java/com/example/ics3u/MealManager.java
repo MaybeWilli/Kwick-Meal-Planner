@@ -1,3 +1,9 @@
+/*
+* This java file serves as the main interface for interacting with any form of saved meal
+* that every file can look into. It also doubles as the database interface, since our database
+* model needs one file that interacts with database related affairs. The functionaltiy includes
+* adding, deleting, updating, and fetching from both the meals and the planned meals.
+ */
 package com.example.ics3u;
 
 import android.os.Build;
@@ -17,37 +23,18 @@ public class MealManager {
     public static List<SavedMeal> savedMeals;
     public static List<SavedMeal> savedPlannedMeals;
 
-    /*public static void addMeal(String name) //look, I'll add some more overloads later, ok?
-    {
-        Meal newMeal = new Meal(name, new ArrayList<String>());
-        meals.add(newMeal);
-        InsertSavedMeal insertSavedMeal = new InsertSavedMeal(name, "", 0);
-        insertSavedMeal.thread.start();
-        PrintElements();
-    }*/
-
-    @RequiresApi(api = Build.VERSION_CODES.O)
-    public static void addMeal(String name, ArrayList<String> ingredients) //look, I'll add some more overloads later, ok?
-    {
-        Meal newMeal = new Meal(name, ingredients);
-        meals.add(newMeal);
-        String ingredientStr = String.join(",", ingredients);
-        Log.e("hmm", ingredientStr);
-        //InsertSavedMeal insertSavedMeal = new InsertSavedMeal(name, ingredientStr, 0);
-        //insertSavedMeal.thread.start();
-        PrintElements();
-    }
-
+    //save a new meal to both the ArrayList and the database
     @RequiresApi(api = Build.VERSION_CODES.O)
     public static void addMeal(String name, ArrayList<String> ingredients, float calories, ArrayList<String> groups, ArrayList<Float> servings, ArrayList<Float> calList, float totalServings)
     {
+        //add tp ArrayList
         Meal newMeal = new Meal(name, new ArrayList<String>(), calories, groups, servings, calList, totalServings);
         newMeal.ingredients.addAll(ingredients);
         meals.add(newMeal);
 
+        //convert to proper format and save into database
         //convert ingredient to string
         String ingredientStr = String.join(",", ingredients);
-        Log.e("mealmanager", ingredientStr);
 
         //convert food groups to string
         String groupsStr = String.join(",", groups);
@@ -68,18 +55,19 @@ public class MealManager {
         }
         String calStr = String.join(",", calStrList);
 
+        //run thread to save into database
         InsertSavedMeal insertSavedMeal = new InsertSavedMeal(name, ingredientStr, calories, servingsStr, groupsStr, calStr, totalServings);
         insertSavedMeal.thread.start();
-        PrintElements();
     }
 
+    //add a new planned meal to the ArrayList and database
     @RequiresApi(api = Build.VERSION_CODES.O)
     public static void addPlannedMeal(Meal meal, String date, float servings)
     {
+        //add to the ArrayList
         MealManager.plannedMeals.add(new PlannedMeal(meal, date, servings));
-        PrintElements();
-        Log.e("hmm", "Not here either!");
 
+        //convert everything to String or float, and save into database
         //convert ingredient to string
         String ingredientStr = String.join(",", meal.ingredients);
         Log.e("mealmanager", ingredientStr);
@@ -103,22 +91,25 @@ public class MealManager {
         }
         String calStr = String.join(",", calList);
 
+        //run background thread to save data into planned meal database
         InsertSavedPlannedMeal insertSavedPlannedMeal = new InsertSavedPlannedMeal(meal.name, ingredientStr, date, meal.calories, servings, servingsStr, groupsStr, calStr, meal.totalServings);
-        //(String name, String date, float calories, float servings, String servingsStr, String groupStr, String calorieStr, float totalServings)
         insertSavedPlannedMeal.thread.start();
     }
 
+    //prints out every item in the meals ArrayList (used for debugging purposes)
     private static void PrintElements()
     {
         for (int i = 0; i < meals.size(); i++)
         {
-            //Log.e("hmm", meals.get(i).name);
+            Log.e("hmm", meals.get(i).name);
         }
     }
 
+    //delete a meal from the ArrayList and Database based on the position in the ArrayList
     @RequiresApi(api = Build.VERSION_CODES.O)
     public static void deleteMeal(int mealPos)
     {
+        //remove from ArrayList
         Meal meal = MealManager.meals.get(mealPos);
         MealManager.meals.remove(mealPos);
 
@@ -126,8 +117,10 @@ public class MealManager {
         String ingredientStr = String.join(",", meal.ingredients);
         Log.e("mealmanager", ingredientStr);
 
+        //find the id of the SavedMeal in the database
         int id = 0;
         for (int i = 0; i < savedMeals.size(); i++) {
+            //compare meals until the right one is found
             if (meal.name.equals(savedMeals.get(i).name) && ingredientStr.equals(savedMeals.get(i).ingredients)) {
                 id = savedMeals.get(i).uid;
                 break;
@@ -143,20 +136,20 @@ public class MealManager {
                 i = 0;
             }
         }
-        Log.e("threadTesting", "I am here!");
-        //delete from savedMealDatabase
+        //start background thread to delete from savedMealDatabase
         DeleteSavedMeal deleteSavedMeal = new DeleteSavedMeal(id, meal.name);
         deleteSavedMeal.thread.start();
     }
 
+    //delete a planned meal from the arrayList and database
     @RequiresApi(api = Build.VERSION_CODES.O)
     public static void deletePlannedMeal(int mealPos)
     {
-        Integer test = mealPos;
-        Log.e("deleteplannedmeal", test.toString());
+        //remove from arrayList
         PlannedMeal plannedMeal = MealManager.plannedMeals.get(mealPos);
         MealManager.plannedMeals.remove(mealPos);
 
+        //find in database
         String ingredientStr = String.join(",", plannedMeal.meal.ingredients);
         int id = 0;
 
@@ -170,24 +163,27 @@ public class MealManager {
                 break;
             }
         }
+
+        //run background thread to remove from database
         DeleteSavedPlannedMeal deleteSavedPlannedMeal = new DeleteSavedPlannedMeal(id);
         deleteSavedPlannedMeal.thread.start();
     }
 
+    //update a meal give its old name and ingredients
     @RequiresApi(api = Build.VERSION_CODES.O)
     public static void updateMeal(Meal newMeal, String oldName, String oldIngredientStr)
     {
+        //find meal in database
         int updateMealId = 0;
 
         for (int i = 0; i < savedMeals.size(); i++) {
-            Log.e("updating", oldName+" "+savedMeals.get(i).name+" "+oldIngredientStr+" "+savedMeals.get(i).ingredients);
             if (oldName.equals(savedMeals.get(i).name) && oldIngredientStr.equals(savedMeals.get(i).ingredients)) {
                 updateMealId = savedMeals.get(i).uid;
-                Log.e("updating", "Match found!");
                 break;
             }
         }
 
+        //format a SavedMeal and update
         ArrayList<String> strServings = new ArrayList<String>();
         ArrayList<String> strCalories = new ArrayList<String>();
 
@@ -207,29 +203,33 @@ public class MealManager {
         meal.caloriesStr = String.join(",", strCalories);
         meal.totalServings = newMeal.calories;
 
+        //run background thread to update a meal
         UpdateSavedMeal updateSavedMeal = new UpdateSavedMeal(meal);
         updateSavedMeal.thread.start();
 
     }
 
+    //fetch data from database
     @RequiresApi(api = Build.VERSION_CODES.O)
     public static void InstantiateArrays()
     {
-        //Log.e("hmm", "hmm");
+        //clear current ArrayList
         MealManager.meals.clear();
-        //Log.e("hmm", "bruh");
+
+        //fetch a list from the database
         savedMeals = MainActivity.mealDao.getAll();
-        //Log.e("hmm", "check");
+
+        //reset the mealId
         mealId = 0;
-        //Log.e("hmm", "well");
-        //Log.e("hmm", "uh "+savedMeals.size());
         int maxId = 0;
+
+        //turn the savedmeal into a meal, and add it to the mealArray
         for (int i = 0; i < savedMeals.size(); i++)
         {
             if (savedMeals.get(i).uid > maxId)
             {
                 maxId = savedMeals.get(i).uid;
-                mealId = maxId;
+                mealId = maxId; //find the new uid to be used
             }
             String name = savedMeals.get(i).name;
             ArrayList<String> ingredients = new ArrayList<String>(Arrays.asList(savedMeals.get(i).ingredients.split(",")));
@@ -246,14 +246,13 @@ public class MealManager {
                 floatCalorieList.add(Float.parseFloat(calorieList.get(j)));
             }
             MealManager.meals.add(new Meal(name, ingredients, calories, groups, servings, floatCalorieList, totalServings));
-            //(String name, ArrayList<String> ingredients, float calories, ArrayList<String> groups, ArrayList<Float> servings, ArrayList<Float> calorieList, float totServings)
-            //MealManager.meals.add(new Meal(savedMeals.get(i).name, new ArrayList<String>(Arrays.asList(savedMeals.get(i).ingredients.split(","))), savedMeals.get(i).calories));
         }
 
+        //clear plannedMeals and fetch data from the planned meal database
         MealManager.plannedMeals.clear();
-        //Log.e("hmm", "Past that part");
         savedPlannedMeals = MainActivity.plannedMealDao.getAll();
 
+        //find the new uid, and format the SavedMeals into plannedMeals
         plannedMealId = 0;
         int maxPlannedId = 0;
         for (int i = 0; i < savedPlannedMeals.size(); i++)
@@ -261,38 +260,28 @@ public class MealManager {
             if (savedPlannedMeals.get(i).uid > maxPlannedId)
             {
                 maxPlannedId = savedPlannedMeals.get(i).uid;
-                plannedMealId = maxPlannedId;
+                plannedMealId = maxPlannedId; //find new uid
             }
-            Log.e("hmm", "Past that part2");
             String name = savedPlannedMeals.get(i).name;
-            Log.e("hmm", "Past that part3");
-            //ArrayList<String> ingredients = new ArrayList<String>(Arrays.asList(savedPlannedMeals.get(i).ingredients.split(",")));
-            //Log.e("hmm", "Past that part4");
             float calories = savedPlannedMeals.get(i).calories;
-            Log.e("hmm", "Past that part5");
             ArrayList<String> groups = new ArrayList<String>(Arrays.asList(savedPlannedMeals.get(i).groups.split(",")));
-            Log.e("hmm", "Past that part6");
             ArrayList<String> servingsStrList = new ArrayList<String>(Arrays.asList(savedPlannedMeals.get(i).servingsStr.split(",")));
             ArrayList<String> ingredientsStrList = new ArrayList<String>(Arrays.asList(savedPlannedMeals.get(i).ingredients.split(",")));
-            Log.e("hmm", "Past that part7");
             ArrayList<Float> servings = new ArrayList<Float>();
             ArrayList<String> calorieList = new ArrayList<String>(Arrays.asList(savedPlannedMeals.get(i).caloriesStr.split(",")));
             ArrayList<Float> floatCalorieList = new ArrayList<Float>();
             Float totalServings = savedPlannedMeals.get(i).totalServings;
             for (int j = 0; j < servingsStrList.size(); j++)
             {
-                Log.e("hmm", "Past that part8");
                 servings.add(Float.parseFloat(servingsStrList.get(j)));
                 floatCalorieList.add(Float.parseFloat(calorieList.get(j)));
             }
             Meal meal = new Meal(name, ingredientsStrList, calories, groups, servings, floatCalorieList, totalServings);
-            Log.e("hmm", "Past that part9");
             MealManager.plannedMeals.add(new PlannedMeal(meal, savedPlannedMeals.get(i).date, savedPlannedMeals.get(i).servings));
-            Log.e("hmm", "Past that part10");
         }
-        Log.e("hmm", "I am here again! I dunno.");
     }
 
+    //background thread to save a new SavedMeal into the savedMealDatabase
     static class InsertSavedMeal implements Runnable {
         Thread thread = new Thread(this, "insert_data");
         String name;
@@ -330,6 +319,7 @@ public class MealManager {
         }
     }
 
+    //background thread to delete a meal given its uid, and remove all plannedMeals with a certain name
     static class DeleteSavedMeal implements Runnable {
         Thread thread = new Thread(this, "insert_data");
         int id;
@@ -349,6 +339,7 @@ public class MealManager {
         }
     }
 
+    //background thread to delete a single planned meal given its uid
     static class DeleteSavedPlannedMeal implements Runnable {
         Thread thread = new Thread(this, "insert_data");
         int id;
@@ -365,22 +356,7 @@ public class MealManager {
         }
     }
 
-    static class DeleteSavedPlannedMealByName implements Runnable {
-        Thread thread = new Thread(this, "insert_data");
-        String name;
-
-        public DeleteSavedPlannedMealByName(String name)
-        {
-            this.name = name;
-
-        }
-        @Override
-        public void run() {
-
-            MainActivity.savedPlannedMealDatabase.mealDao().deleteAllMealsWithName(name);
-        }
-    }
-
+    //background thread to update a saved meal
     static class UpdateSavedMeal implements Runnable {
         Thread thread = new Thread(this, "insert_data");
         SavedMeal savedMeal;
@@ -397,6 +373,7 @@ public class MealManager {
         }
     }
 
+    //background thread to add a new plannedMeal to the database
     static class InsertSavedPlannedMeal implements Runnable {
         Thread thread = new Thread(this, "insert_planned_data");
         String name;
@@ -429,7 +406,7 @@ public class MealManager {
             meal.calories = this.calories;
             meal.servings = this.servings;
             meal.servingsStr = this.servingsStr;
-            meal.groups = this.servingsStr;
+            meal.groups = this.groupStr;
             meal.caloriesStr = this.calorieStr;
             meal.totalServings = this.totalServings;
             meal.ingredients = this.ingredients;

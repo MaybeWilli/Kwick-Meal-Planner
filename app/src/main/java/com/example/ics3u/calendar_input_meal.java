@@ -1,3 +1,9 @@
+/*
+* This is the java class that controls the page that inputs meals
+* It sends the information the user inputs over to the
+* MealManager, where the data is stored in the memory as an ArrayList
+* and in the storage as a database
+*/
 package com.example.ics3u;
 
 import android.os.Build;
@@ -28,14 +34,15 @@ public class calendar_input_meal extends AppCompatActivity {
 
     private ArrayList<PlannedMeal> dailyMeals = new ArrayList<PlannedMeal>();
     private ArrayList<Integer> mealPosList = new ArrayList<Integer>();
+    private float dailyTotalServings;
 
+    //This function sets the default variables and sets up the texts
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_calendar_input_meal);
-        initWidgets();
+        initWidgets(); //set the variables
         dateTV.setText("Date: "+ CalendarPage.currentDate);
-        Log.e("hmm", "Hello1");
 
         //set the spinner
         mealInputSpinner = findViewById(R.id.mealInputSpinner);
@@ -43,17 +50,11 @@ public class calendar_input_meal extends AppCompatActivity {
         {
             arrayList.add(MealManager.meals.get(i).name);
         }
-
-        Log.e("hmm", "Hello2");
-        //*/
-
-        //arrayList.add("Hello");
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, arrayList);
         arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         mealInputSpinner.setAdapter(arrayAdapter);
 
-        Log.e("hmm", "Hello3");
-        //set the meals and meal summary thing
+        //set the text for the daily summary (calories and food groups)
         String mealText = "";
         float totalCalories = 0;
 
@@ -62,22 +63,16 @@ public class calendar_input_meal extends AppCompatActivity {
         float dairy = 0;
         float meat = 0;
         float other = 0;
-        //float totalServings;
 
         Boolean hasMeals = Boolean.FALSE;
-        Log.e("hmm", "Hello3.1"+MealManager.plannedMeals.size());
         if (MealManager.plannedMeals.size() != 0)
         {
             for (int i = 0; i < MealManager.plannedMeals.size(); i++)
             {
                 Float totalServings = 0f;
-                Log.e("hmm", "Whyyyy");
-                Log.e("hmm", MealManager.plannedMeals.get(i).date);
-                Log.e("hmm", "oh");
                 if (MealManager.plannedMeals.get(i).date.equals(CalendarPage.currentDate))
                 {
                     mealText = mealText + "\n-"+MealManager.plannedMeals.get(i).meal.name;
-                    //totalCalories += MealManager.plannedMeals.get(i).meal.calories * MealManager.plannedMeals.get(i).servings;
                     hasMeals = Boolean.TRUE;
                     dailyMeals.add(MealManager.plannedMeals.get(i));
                     mealPosList.add(i);
@@ -85,10 +80,12 @@ public class calendar_input_meal extends AppCompatActivity {
                     for (int j = 0; j < MealManager.plannedMeals.get(i).meal.servings.size(); j++)
                     {
                         totalServings += MealManager.plannedMeals.get(i).meal.servings.get(j);
+                        dailyTotalServings += MealManager.plannedMeals.get(i).meal.servings.get(j);
                     }
 
                     for (int j = 0; j < MealManager.plannedMeals.get(i).meal.servings.size(); j++)
                     {
+                        Log.e("mealinput", "I am here!");
                         totalCalories += MealManager.plannedMeals.get(i).meal.caloriesList.get(j)/totalServings*MealManager.plannedMeals.get(i).servings;
                         String ingName = MealManager.plannedMeals.get(i).meal.groups.get(j);
                         float servingSize = MealManager.plannedMeals.get(i).meal.servings.get(j);
@@ -121,39 +118,39 @@ public class calendar_input_meal extends AppCompatActivity {
         Log.e("hmm", "hello3.4");
         if (hasMeals)
         {
-            //mealText = "Here are today's meals:" + mealText;
-            //mealText += "\nToday's total calories: "+totalCalories;
             String value = "Daily Summary:\n";
-            value += "\nVegetable servings per serving: "+(Math.round(vegetables*100.0)/100.0);
-            value += "\nGrain servings per serving: "+(Math.round(grains*100.0)/100.0);
-            value += "\nDairy servings per serving: "+(Math.round(dairy*100.0)/100.0);
-            value += "\nMeat servings per serving: "+(Math.round(meat*100.0)/100.0);
-            value += "\nOther servings per serving: "+(Math.round(other*100.0)/100.0);
-            value += "\nToday's total calories: "+(Math.round(totalCalories*100.0)/100.0)+"\n\n";
+            value += "\nVegetable servings per serving: "+(Math.round(vegetables*dailyTotalServings*100.0)/100.0);//*dailyTotalServings;
+            value += "\nGrain servings per serving: "+(Math.round(grains*100.0)/100.0)*dailyTotalServings;
+            value += "\nDairy servings per serving: "+(Math.round(dairy*100.0)/100.0)*dailyTotalServings;
+            value += "\nMeat servings per serving: "+(Math.round(meat*100.0)/100.0)*dailyTotalServings;
+            value += "\nOther servings per serving: "+(Math.round(other*100.0)/100.0)*dailyTotalServings;
+            value += "\nToday's total calories: "+(Math.round(totalCalories*100.0)/100.0)*dailyTotalServings+"\n\n";
+            Float a = vegetables;
             servingsTV.setText(value);
         }
-        Log.e("hmm", "Hello4");
-        //dailyMeal.setText(mealText);
-        Log.e("hmm", "Hello5");
 
+        //add the buttons for the meals for that day
         addViews();
     }
 
+    //Set the variables
     private void initWidgets()
     {
         calenderET = findViewById(R.id.mealInputET);
         dateTV = findViewById(R.id.dateTV);
-        //dailyMeal = findViewById(R.id.dailyMeals);
         servingsET = findViewById(R.id.servingsET);
         servingsTV = findViewById(R.id.servingsTV);
         layout = findViewById(R.id.editLayout);
     }
 
+    //Send over the information to the MealManager
     @RequiresApi(api = Build.VERSION_CODES.O)
     public void calendarSaveMeal(View view)
     {
         Meal selectedMeal = new Meal();
         String mealName = mealInputSpinner.getSelectedItem().toString();
+
+        //find the relevant meal from the MealManager.meals list
         for (int i = 0; i < MealManager.meals.size(); i++)
         {
             if (MealManager.meals.get(i).name == mealName)
@@ -161,7 +158,8 @@ public class calendar_input_meal extends AppCompatActivity {
                 selectedMeal = MealManager.meals.get(i);
             }
         }
-        Log.e("hmm", "Well, not here!");
+
+        //get the total servings
         float servings;
         if (!servingsET.getText().toString().equals(""))
         {
@@ -171,13 +169,16 @@ public class calendar_input_meal extends AppCompatActivity {
         {
             servings = 0;
         }
+
+        //send over the information to the MealManager
         MealManager.addPlannedMeal(selectedMeal, CalendarPage.currentDate, servings);
-        Log.e("hmm", "wacky");
-        finish();
+        finish(); //close the XML page
     }
 
+    //sort through the meals, and add the textview/button group to the scrollView
     public void addViews()
     {
+        //go through every one of the meals for the day
         for (int i = 0; i < dailyMeals.size(); i++) {
             View view = getLayoutInflater().inflate(R.layout.activity_edit_planned_meal_view, null, false);
             TextView text = view.findViewById(R.id.nameTV);
@@ -188,27 +189,13 @@ public class calendar_input_meal extends AppCompatActivity {
                 @RequiresApi(api = Build.VERSION_CODES.O)
                 @Override
                 public void onClick(View view) {
-                    //do things
-
-                    //find the current item
+                    //find the current item and send the data over to MealManager
                     Log.e("editing", "I am here!1");
                     int currentItem = (int) view.getTag();
                     dailyMeals.remove(mealPosList.indexOf(currentItem));
                     mealPosList.remove(mealPosList.indexOf(currentItem));
                     MealManager.deletePlannedMeal(currentItem);
                     updateViews();
-                    /*TextView textView = view.findViewById(R.id.nameTV);
-                    String name = textView.getText().toString();
-                    for (int i = 0; i < MealManager.meals.size(); i++)
-                    {
-                        if (name.equals(MealManager.meals.get(i).name))
-                        {
-                            currentItem = i;
-                            break;
-                        }
-                    }*/
-
-                    //delete meal thing
                 }
             });
             layout.addView(view);
@@ -216,6 +203,7 @@ public class calendar_input_meal extends AppCompatActivity {
 
     }
 
+    //remove old views and add them again
     private void updateViews()
     {
         layout.removeAllViews();
