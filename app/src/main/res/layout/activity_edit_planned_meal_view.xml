@@ -1,4 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--This is the in-developnent UI-->
+<!--This is the mini-view that appears in the
+activity_calendar_input_meal page, one for each planned meal. Pressing
+the delete button will delete the planned meal from the database and
+memory-->
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"

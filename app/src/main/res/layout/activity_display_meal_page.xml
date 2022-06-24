@@ -1,4 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--This is the in-developnent UI-->
+<!--This page displays the means inputed in the meals database.
+It displays the name, ingredients, calories, and the four food groups
+found in one serving of the meal. It also comes with a search bar that
+lets the user narrow down the meals. Once the meals spill off the page,
+it will start scrolling.
+-->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -40,7 +47,7 @@
         android:layout_marginLeft="30dp"
         android:layout_marginTop="150dp"
         android:textColor="@color/black"
-        android:text="Hello"
+        android:text="Default Text"
         android:textSize="20sp"
         android:scrollbars="vertical"
         />

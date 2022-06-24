@@ -1,4 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--This is the in-developnent UI-->
+<!--This is the calendar page. It displays all the days in the
+month, and pressing the forward and back buttons navigate through
+the months.-->
 <LinearLayout
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
