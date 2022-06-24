@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--This is the final UI-->
+<!--This XML page is used for the user to input which meal they want
+to eat, along with how many servings of said meal are to be eaten.
+Opening up this page once a meal has been inputed will show an option for
+the meal to be deleted, along with how many calories, and servings of
+the four food groups are planned for the day.-->
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"

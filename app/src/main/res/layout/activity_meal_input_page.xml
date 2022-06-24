@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--This is the final UI-->
+<!--This page allows the user to enter a new meal name. Pressing the
+Save Meal button will open the activity_ingredient_input_page.-->
 <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"

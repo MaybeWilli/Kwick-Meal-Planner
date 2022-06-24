@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--This is the final UI-->
+<!--This page holds a bunch of buttons that allow the user to
+switch the background song that plays.-->
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
